@@ -1,0 +1,26 @@
+<html>
+<head>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var key = "";
+		var showPilots = false;
+		window.location.search.replace('?', '').split("&").forEach(function(param) {
+			var param = param.split("=");
+			if (param && param.length == 2) {
+				if (param[0] == "key") {
+					key = param[1];
+				} else if (param[0] == "showPilots") {
+					showPilots = param[1];
+				}
+			}
+		});
+		var site = "http://localhost:8080/web/result.html?key=" + key + "&showPilots=" + showPilots;
+		//var site = "https://cloud.fpvracetracker.com/web/result.html?key=" +  key + "&showPilots=" + showPilots;
+		document.getElementById('resultIFrame').src = site;
+	}, false);
+</script>
+</head>
+<body style="background-color: darkslategrey;">
+	<iframe id="resultIFrame" style="position: absolute; top: 10px; left: 15%; width: 70%; height: calc(100% - 20px);"></iframe>
+</body>
+</html>

@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="app">
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<script type="text/javascript" src="script/js/lib/angular.min.js"></script>
+<script type="text/javascript" src="script/js/lib/md5.js"></script>
+<script type="text/javascript" src="script/js/main.js"></script>
+<link rel="stylesheet" media="screen" href="css/angular-csp.css">
+<link rel="stylesheet" media="screen" href="css/main.css">
+<link rel="stylesheet" media="screen" href="css/connection.css">
+<link rel="stylesheet" media="screen" href="css/menu.css">
+<link rel="stylesheet" media="screen" href="css/content.css">
+<link rel="stylesheet" media="screen" href="css/pilots.css">
+<link rel="stylesheet" media="screen" href="css/races.css">
+<link rel="stylesheet" media="screen" href="css/usb.css">
+<link rel="stylesheet" media="screen" href="css/statistic.css">
+<link rel="stylesheet" media="screen" href="css/confirmation.css">
+<link rel="stylesheet" media="screen" href="css/events.css">
+<link rel="stylesheet" media="screen" href="css/notification.css">
+<link rel="stylesheet" media="screen" href="css/raceBand.css">
+<link rel="stylesheet" media="screen" href="css/classes.css">
+<link rel="stylesheet" media="screen" href="css/tts.css">
+<link rel="stylesheet" media="screen" href="css/welcome.css">
+<link rel="stylesheet" media="screen" href="css/cloud.css">
+
+</head>
+<body>
+	<div id="welcome">
+		<div id="login" ng-controller="UserController as c">
+			<div id="loginForm">
+				<form name="loginForm" autocomplete="off">
+					<table>
+						<tr>
+							<td class="tableSeperator" colspan="2"><span class="header font-large">WELCOME</span></td>
+						</tr>
+						<tr>
+							<td><span class="font-small">NAME:</span></td>
+							<td><input required class="email" ng-model="c.service.user.name" type="text" class="" /></td>
+						</tr>
+						<tr>
+							<td><span class="font-small">E-MAIL:</span></td>
+							<td><input required ng-model="c.service.user.email" type="email" class="" /></td>
+						</tr>
+						<!-- 					<tr>
+						<td><span class="font-small">PASSWORD:</span></td>
+						<td><input type="text" class="" /></td>
+					</tr>
+ -->
+						<tr>
+							<td colspan="2"><br />
+								<div ng-enabled="loginForm.$valid" ng-class="loginForm.$valid ? '' : 'disabled'" ng-click="c.service.register()" id="loginButton" class="button">START</div></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<p>
+				Thank you for trusting in the FPV RACE TRACKER!<br /> Please help us to keep this software awesome and report any bugs or feature requests to <a target="_blank"
+					href="mailto:info@fpvracetracker.com">info@fpvracetracker.com</a>!
+			</p>
+		</div>
+		<!-- div id="welcomeButton" class="button">OK</div-->
+		<textarea id="changelog" readonly>
+		</textarea>
+	</div>
+	<div id="menu">
+		<div class="menuElement" id="menuNewEvent">
+			<!-- <img src="img/temp.svg"> -->
+			<span class="font-large">EVENTS</span>
+		</div>
+		<div class="menuElement" id="menuNewRace">
+			<!-- <img src="img/temp.svg"> -->
+			<span class="font-large">RACES</span>
+		</div>
+		<div class="menuElement" id="menuNewPilot">
+			<!-- <img src="img/temp.svg"> -->
+			<span class="font-large">PILOTS</span>
+		</div>
+		<div class="menuElement" id="menuStatistics">
+			<span class="font-large">STATISTICS</span>
+		</div>
+		<div class="menuElement" id="menuConfiguration">
+			<!-- <img src="img/temp.svg"> -->
+			<span class="font-large">CONFIG</span>
+		</div>
+	</div>
+	<div id="subMenu">
+		<div class="menuElement" id="subMenuUsb">
+			<!-- <img src="img/temp.svg"> -->
+			<span>USB</span>
+		</div>
+		<div class="menuElement" id="subMenuRaceBand">
+			<!-- <img src="img/temp.svg"> -->
+			<span>RACE BAND</span>
+		</div>
+		<div class="menuElement" id="subMenuClasses">
+			<!-- <img src="img/temp.svg"> -->
+			<span>CLASSES</span>
+		</div>
+		<div class="menuElement" id="subMenuScreen2">
+			<!-- <img src="img/temp.svg"> -->
+			<span>SCREEN 2</span>
+		</div>
+		<div class="menuElement" id="subMenuTTS">
+			<!-- <img src="img/temp.svg"> -->
+			<span>TTS</span>
+		</div>
+		<div class="menuElement" id="subMenuCloud">
+			<!-- <img src="img/temp.svg"> -->
+			<span>CLOUD</span>
+		</div>
+		<div class="menuElement" id="subMenuLiveScreen">
+			<!-- <img src="img/temp.svg"> -->
+			<span>STREAMING</span>
+		</div>
+	</div>
+	<div class="removed" id="confirmBox" ng-controller="ConfirmationController as c">
+		<div id="confirmBox-content">
+			<span>Are you sure?</span>
+			<div class="button" ng-click="c.service.confirm()">
+				<span>CONFIRM</span>
+			</div>
+			<div class="button" ng-click="c.service.cancel()">
+				<span>CANCEL</span>
+			</div>
+		</div>
+	</div>
+	<div class="removed" id="notificationBox" ng-controller="NotificationController as c">
+		<div id="notificationBox-content">
+			<span>{{c.service.notification.text}}</span>
+		</div>
+	</div>
+
+	<div id="content">
+		<div id="events" class="contentElement" ng-controller="CompetitionController as c">
+			<div id="configureEvent-container">
+				<table>
+					<tr>
+						<td class="tableSeperator" colspan="2"><span>EVENT:</span></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">EVENT:</span></td>
+						<td class="col2"><select ng-model="c.service.selectedCompetition" ng-change="c.service.competitionSelected()"
+							ng-options="competition as (competition.description +(competition.dateFrom ? (' '+competition.dateFrom.getDate() + '/'+
+									   (+competition.dateFrom.getMonth()+1) +'/'+
+									   competition.dateFrom.getFullYear()) : '')) for competition in c.service.competitions">
+						</select></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small"></span></td>
+						<td class="col2"><a ng-click="c.service.createNewCompetition();" href="">create new</a></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">EVENT NAME:</span></td>
+						<td class="col2"><input type="text" ng-model="c.service.selectedCompetition.description" class="" /></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">LOCATION:</span></td>
+						<td class="col2"><input type="text" ng-model="c.service.selectedCompetition.location" class="" /></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">DATE FROM:</span></td>
+						<td class="col2"><input class="datepicker font-small" type="datetime-local" ng-model="c.service.selectedCompetition.dateFrom"></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">DATE TO:</span></td>
+						<td class="col2"><input class="datepicker font-small" type="datetime-local" ng-model="c.service.selectedCompetition.dateTo"></td>
+					</tr>
+				</table>
+				<div id="eventSettings">
+					<div ng-click="c.service.toggleEventSettings()" ng-class="c.service.config.viewOnlineRegistration ? 'esHeader first' : 'esHeader first selected'">SELECT CLASSES</div>
+					<div class="font-" ng-click="c.service.toggleEventSettings()" ng-class="c.service.config.viewOnlineRegistration ? 'esHeader selected' : 'esHeader'">ONLINE</div>
+					<div ng-hide="c.service.config.viewOnlineRegistration">
+						<table id="chooseClassTable">
+							<tbody>
+								<tr ng-class="c.service.classAssigned(c.service.selectedCompetition, classs) != -1 ? 'added' : ''" ng-click="c.service.addClass(c.service.selectedCompetition, classs)" ng-class-odd="'oddRow'"
+									ng-repeat="classs in c.classService.classes track by $index">
+									<td colspan="2"><span>{{classs.name}}</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<table ng-hide="c.service.selectedCompetition.classes.length < 1">
+							<tr>
+								<td class="tableSeperator" colspan="2"><span>CONFIGURE CLASSES</span></td>
+							</tr>
+						</table>
+						<div id="classTabs" ng-hide="c.service.selectedCompetition.classes.length < 1">
+							<div ng-click="c.service.selectClassToEditRaceConfig(classs)" title="{{classs.name}}" ng-class="c.service.selectedClassForRaceConfig.uuid == classs.uuid ? 'classTab selected' : 'classTab'"
+								ng-repeat="classs in c.service.selectedCompetition.classes track by $index">{{classs.name}}</div>
+						</div>
+						<table id="raceConfigTable" ng-hide="c.service.selectedCompetition.classes.length < 1">
+							<thead>
+								<tr>
+									<td>FORMAT</td>
+									<td>ROUNDS</td>
+									<td>TYPE</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>TRAINING</td>
+									<td><input type="number" min="0" ng-change="c.service.roundsTrainingChanged()" ng-model="c.service.currentCompetitionConfig.roundsTraining"></td>
+									<td><select ng-model="c.service.currentCompetitionConfig.typeTraining" ng-change="c.service.typeTrainingChanged()" ng-options="type for type in c.raceService.raceTypes">
+									</select></td>
+								</tr>
+								<tr>
+									<td>QUALIFYING</td>
+									<td><input type="number" min="0" ng-change="c.service.roundsQualifyingChanged()" ng-model="c.service.currentCompetitionConfig.roundsQualifying"></td>
+									<td><select ng-model="c.service.currentCompetitionConfig.typeQualifying" ng-change="c.service.typeQualifyingChanged()" ng-options="type for type in c.raceService.raceTypes">
+									</select></td>
+								</tr>
+								<tr>
+									<td>COMPETITION</td>
+									<td><input type="number" min="0" ng-change="c.service.roundsCompetitionChanged()" ng-model="c.service.currentCompetitionConfig.roundsCompetition"></td>
+									<td><select ng-model="c.service.currentCompetitionConfig.typeCompetition" ng-change="c.service.typeCompetitionChanged()" ng-options="type for type in c.raceService.raceTypes">
+									</select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div ng-show="c.service.config.viewOnlineRegistration">
+						<table>
+							<tr>
+								<td class="col1"><span class="font-small">ENABLED:</span></td>
+								<td class="col2"><label class="font-small"><input class="onlineRegisterCheckbox" type="checkbox" title="Enable this checkbox to allow online registration!"
+										ng-model="c.service.selectedCompetition.onlineRegistrationPossible">&nbsp;ONLINE REGISTRATION</label></td>
+							</tr>
+							<tr>
+								<td class="col1"></td>
+								<td class="col2"><label class="font-small"><input class="onlineRegisterCheckbox" type="checkbox" title="Enable this checkbox to allow online results!"
+										ng-model="c.service.selectedCompetition.onlineResultPossible">&nbsp;ONLINE RESULTS</label></td>
+							</tr>
+							<tr>
+								<td class="col1"></td>
+								<td class="col2"><label class="font-small"><input class="onlineRegisterCheckbox" type="checkbox" title="Enable this checkbox to allow online race calender!"
+										ng-model="c.service.selectedCompetition.onlineEventPossible">&nbsp;ONLINE CALENDAR</label></td>
+							</tr>
+							<tr style="display: none" ng-show="c.service.selectedCompetition.onlineRegistrationPossible">
+								<td class="col1"><span class="font-small">REG. END:</span></td>
+								<td class="col2"><input class="datepicker font-small" type="datetime-local" ng-model="c.service.selectedCompetition.onlineRegistrationEnd"></td>
+							</tr>
+							<tr>
+								<td class="col1"><span class="font-small">LINK:</span></td>
+								<td class="col2"><a ng-show="c.service.selectedCompetition.onlineRegistrationPossible" href="{{c.service.registrationLink+''+c.service.selectedCompetition.onlineRegistrationKey}}"
+									target="_blank">online registration</a></td>
+							</tr>
+							<tr>
+								<td class="col1"><span class="font-small">&nbsp;</span></td>
+								<td class="col2"><a ng-show="c.service.selectedCompetition.onlineResultPossible" href="{{c.service.resultLink+''+c.service.selectedCompetition.onlineResultKey}}" target="_blank">online
+										results</a></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineResultPossible">
+								<td class="col1"><span class="font-small">&nbsp;</span></td>
+								<td class="col2"><a ng-show="c.service.selectedCompetition.onlineResultPossible && c.service.selectedCompetition.onlineRegistrationPossible" href="{{c.service.buildEventLink()}}"
+									target="_blank">online event view</a></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineEventPossible">
+								<td class="col1"><span class="font-small">&nbsp;</span></td>
+								<td class="col2"><a href="{{c.service.buildPrivateCalendarLink()}}" target="_blank">your calendar</a></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineEventPossible">
+								<td class="col1"><span class="font-small">&nbsp;</span></td>
+								<td class="col2"><a href="{{c.service.buildPublicCalendarLink()}}" target="_blank">public calendar</a></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineResultPossible || c.service.selectedCompetition.onlineRegistrationPossible">
+								<td class="centered" colspan="2">EMBED:</td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineRegistrationPossible">
+								<td class="col1"><span class="font-small">REGISTRATION:</span></td>
+								<td class="col2"><input class="iframeInput" type="text" disabled="disabled" value="{{c.service.registrationIframeCode+''+c.service.selectedCompetition.onlineRegistrationKey}}'></iframe>"></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineResultPossible">
+								<td class="col1"><span class="font-small">RESULT:</span></td>
+								<td class="col2"><input class="iframeInput" type="text" disabled="disabled" value="{{c.service.resultIframeCode+''+c.service.selectedCompetition.onlineResultKey}}'></iframe>"></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineEventPossible">
+								<td class="col1"><span class="font-small">EVENT VIEW:</span></td>
+								<td class="col2"><input class="iframeInput" type="text" disabled="disabled" value="{{c.service.buildOnlineEventIFrame()}}"></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineEventPossible">
+								<td class="col1"><span class="font-small">YOUR CALENDAR:</span></td>
+								<td class="col2"><input class="iframeInput" type="text" disabled="disabled" value="{{c.service.buildPrivateCalendarIFrame()}}"></td>
+							</tr>
+							<tr ng-show="c.service.selectedCompetition.onlineEventPossible">
+								<td class="col1"><span class="font-small">PUBLIC CALENDAR:</span></td>
+								<td class="col2"><input class="iframeInput" type="text" disabled="disabled" value="{{c.service.buildPublicCalendarIFrame()}}"></td>
+							</tr>
+							<tr>
+								<td colspan="2">Please make sure you have at least one class in your event and wait a few seconds for the server to synchronize before opening a link.</td>
+							</tr>
+						</table>
+						<br />
+						<div ng-show="c.cloudSyncService.status.online" class="button showOnlineRegistrationPilots" ng-click="c.service.showOnlinePilots()">
+							<span>SHOW REGISTERED PILOTS</span>
+						</div>
+						<div ng-show="!c.cloudSyncService.status.online" class="button showOnlineRegistrationPilots">
+							<span>PLEASE CONNECT INTERNET</span>
+						</div>
+					</div>
+				</div>
+				<div class="button saveCompetition" ng-click="c.service.save()">
+					<span>SAVE</span>
+				</div>
+			</div>
+
+			<!--ng-class="{disabled: c.service.selectedCompetition.description.length > 0}" -->
+			<div id="addPilotsToEventList">
+				<input id="pilotFilter" placeholder="FILTER" type="text" ng-model="c.service.nameFilter.text" /> <br />
+				<table>
+					<thead>
+						<tr>
+							<td class="tableSeperator" colspan="99"><span>SELECTED PILOTS</span></td>
+						</tr>
+						<tr class="font-small">
+							<td class="clickable" ng-click="c.service.sortByPilotNr()"><span>PILOT NR.</span></td>
+							<td class="clickable" ng-click="c.service.sortByName()"><span>NAME</span></td>
+							<td><span>CLASS</span></td>
+							<td><span>TRANSPONDER</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-click="c.service.removePilot(c.service.selectedCompetition, pilot)" ng-class-odd="'oddRow'"
+							ng-repeat="pilot in c.service.selectedCompetition.pilots | orderBy: c.service.pilotSelectionOrder track by $index">
+							<td><span>{{pilot.pilotNumber}}</span></td>
+							<td><span>{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span></td>
+							<td><span>{{pilot.classs.name}}</span></td>
+							<td><span>{{pilot.deviceId}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<br /> <br />
+				<table>
+					<thead>
+						<tr>
+							<td class="tableSeperator" colspan="99"><span>AVAILABLE PILOTS</span></td>
+						</tr>
+						<tr class="font-small">
+							<td class="clickable" ng-click="c.service.sortByPilotNr()"><span>PILOT NR.</span></td>
+							<td class="clickable" ng-click="c.service.sortByName()"><span>NAME</span></td>
+							<td><span>ALIAS</span></td>
+							<td><span>TRANSPONDER</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-click="c.service.selectClassForPilot(pilot)" ng-class-odd="'oddRow'"
+							ng-repeat="pilot in c.pilotService.pilots | orderBy: c.service.pilotSelectionOrder | filter: c.service.pilotFilter track by $index">
+							<td><span>{{pilot.pilotNumber}}</span></td>
+							<td><span>{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span></td>
+							<td><span>{{pilot.alias}}</span></td>
+							<td><span>{{pilot.deviceId}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="onlinePilotsViewContainer" ng-hide="!c.service.config.viewOnlinePilots">
+				<div id="onlinePilotsView">
+					<table id="onlinePilotsHeader">
+						<tr class="tableSeperator">
+							<td><span class="font-large">AVAILABLE PILOTS</span></td>
+						</tr>
+					</table>
+					<br /> <span> Every pilot added will be automatically assigned to your event and is also available in your local database. </span> <br /> <span> If a pilot with the same e-mail address
+						allready exists in your local database (marked red), this pilot will be used. </span> <br />
+					<table class="onlinePilotsTable">
+						<thead>
+							<tr class="font-small">
+								<td><span>NAME</span></td>
+								<td><span>ALIAS</span></td>
+								<td><span>COUNTRY</span></td>
+								<td><span>E-MAIL</span></td>
+								<td><span>CLUB / TEAM</span></td>
+								<td><span>PHONE</span></td>
+								<td><span>CLASS</span></td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-class="c.service.pilotAllreadyExists(pilot) ? 'exists' : ''" ng-class-odd="'oddRow'" ng-repeat="pilot in c.service.onlinePilots track by $index">
+								<td><span>{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span></td>
+								<td><span>{{pilot.alias}}</span></td>
+								<td><span>{{pilot.country}}</span></td>
+								<td><span>{{pilot.email}}</span></td>
+								<td><span>{{pilot.club}}</span></td>
+								<td><span>{{pilot.phone}}</span></td>
+								<td><span>{{pilot.classs.name}}</span></td>
+								<td ng-class="c.service.config.disableRegButtons ? 'disableClick' : ''" ng-show="c.service.isClassAvailableInCompetition(pilot.classs)"><button
+										ng-click="c.service.addOnlineRegistrationPilot(pilot)">ADD</button>
+									<button ng-click="c.service.removeOnlineRegistrationPilot(pilot)">DELETE</button>
+								<td ng-show="!c.service.isClassAvailableInCompetition(pilot.classs)">CLASS NOT ADDED</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="button showOnlineRegistrationPilots" ng-click="c.service.hideOnlinePilots()">
+						<span>CLOSE</span>
+					</div>
+				</div>
+			</div>
+			<div id="selectClassDialogContainer" ng-hide="!c.service.pilotToAdd">
+				<div id="selectClassDialog">
+					<p>SELECT A CLASS</p>
+					<div class="button" ng-click="c.service.addPilot(c.service.selectedCompetition, c.service.pilotToAdd, config.classs)"
+						ng-repeat="config in c.service.selectedCompetition.competitionConfigs | filter: c.service.classForPilotFilter track by $index">
+						<span>{{config.classs.name}}</span>
+					</div>
+					</br>
+					<div class="button" ng-click="c.service.cancelAddPilot()">
+						<span>CANCEL</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="statistic" class="contentElement" ng-controller="StatisticController as c">
+			<div id="configureStatistic-container">
+				<table class="statisticSelectionTable">
+					<tr>
+						<td class="col1"><span class="font-small">EVENT:</span></td>
+						<td class="col2"><select ng-model="c.service.selectedCompetition" ng-change="c.service.competitionSelected()"
+							ng-options="competition as competition.description for competition in c.competitionService.competitions">
+						</select></td>
+					</tr>
+					<tr class="withSeperator">
+						<td><span class="font-small">RACE:</span></td>
+						<td><select ng-model="c.service.selectedRaceIdentificationObject" ng-change="c.service.raceSelected()"
+							ng-options="roi as (roi.format+' '+roi.class+ ' [R:'+roi.round+ ' H:'+roi.heat+ '] '+roi.type+(roi.description ? ': '+roi.description : '')) for roi in c.service.raceIdentificationObjects | orderBy: c.service.selectionOrder">
+						</select></td>
+						<!-- TODO: map to round: (race.name ? '&Prime;'+race.name+'&Prime;': '')+ -->
+					</tr>
+					<tr class="afterSeperator">
+						<td><span class="font-small">PILOTS:</span></td>
+						<td><input type="radio" ng-model="c.service.statisticType" name="statisticType" value="P"></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">LAPS:</span></td>
+						<td><input type="radio" ng-model="c.service.statisticType" name="statisticType" value="L"></td>
+					</tr>
+				</table>
+				<div class="button" ng-click="c.service.download()">
+					<span>DOWNLOAD RESULT</span>
+				</div>
+				<div class="button" ng-hide="!c.service.selectedCompetition" ng-click="c.service.deleteCompetition()">
+					<span>DELETE WHOLE EVENT</span>
+				</div>
+				<div class="button" ng-hide="!c.service.selectedRaceIdentificationObject" ng-click="c.service.deleteHeat()">
+					<span>DELETE HEAT RESULT</span>
+				</div>
+			</div>
+			<div id="raceResultStatistics">
+				<table id="raceResultStatisticsPilots" ng-hide="c.service.statisticType != 'P'">
+					<thead>
+						<tr class="font-small">
+							<td><span>RANK</span></td>
+							<td><span>PILOT</span></td>
+							<td><span>LAPS</span></td>
+							<td><span>TOTAL</span></td>
+							<td><span>AVERAGE</span></td>
+							<td><span>BEST</span></td>
+							<td><span>LAST</span></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class-odd="'oddRow'" ng-repeat="raceResult in c.service.raceResult.results | orderBy: '+rank'">
+							<td><span>{{raceResult.rank ? raceResult.rank : 'DIS'}}</span></td>
+							<td><span>{{raceResult.pilotName}}</span></td>
+							<td><span>{{raceResult.amountOfLaps}}</span></td>
+							<td><span>{{raceResult.totalTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.averageRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.bestRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.lastRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<table id="raceResultStatisticsLaps" ng-hide="c.service.statisticType != 'L'">
+					<thead>
+						<tr class="font-small">
+							<td><span>PILOT</span></td>
+							<td><span>LAP NUMBER</span></td>
+							<td><span>LAP TIME</span></td>
+							<td><span>PENALTY</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class-odd="'oddRow'" ng-repeat="lapResult in c.service.raceResult.laps | orderBy: c.service.lapResultOrder">
+							<td><span>{{lapResult.pilotName}}</span></td>
+							<td><span>{{lapResult.lapNumber}}</span></td>
+							<td><span>{{lapResult.time*1000 | date:'mm:ss:sss'}}</span></td>
+							<td ng-hide="lapResult.disqualified"><span>{{lapResult.penalty > 0 ? (lapResult.penalty*1000 | date:'mm:ss:sss'): ''}}</span></td>
+							<td ng-hide="!lapResult.disqualified"><span>DIS</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="usb" class="contentElement" ng-controller="UsbController as c">
+			<br /> <br />
+			<div ng-hide="c.devices.length == 0 || c.isReady()">
+				Please select your USB device (tty).<br />For MAC users, please download and install the <a target="_blank" href="http://www.ftdichip.com/Drivers/VCP.htm">virtual com port driver</a> and restart
+				your computer before you connect. <br /> <br />
+			</div>
+			<div id="deviceList" ng-repeat="device in c.devices track by $index">
+				<label> <input type="radio" ng-click="c.selectDevice(device)"> {{device.path}}&nbsp;{{device.displayName}}&nbsp;{{device.productId ? 'deviceId: '+device.productId :
+					''}}&nbsp;{{device.vendorId ? 'vendorId: '+device.vendorId : ''}}
+				</label><br />
+			</div>
+			<div ng-hide="c.devices.length != 0">No device attached, please check your usb connection!</div>
+			<p></p>
+		</div>
+		<div id="screen2" class="contentElement" ng-controller="ManageScreen2Controller">
+			<br /> <br /> <br /> <br />
+			<p>Select a monitor to display Results & Timetable:</p>
+			<br /> <br />
+			<div class="button" ng-click="vm.showScreen2(screen)" ng-repeat="screen in screens track by $index">MONITOR {{$index+1}}</div>
+		</div>
+		<div id="liveScreen" class="contentElement" ng-controller="ManageLiveScreenController">
+			<br /> <br /> <br /> <br /> <label for="allPilotsCheckBox"> <input id="allPilotsCheckBox" type="checkbox" ng-model="allPilotsCheckBoxEnabled" ng-click="vm.allPilotsCheckBoxChanged()" />
+				show ranking of all pilots
+			</label> <br /> <br />
+			<p>
+				Select a pilot for single pilot results:<br />(pilot names will appear as soon as a heat is started)
+			</p>
+			<label> <input id="noPilotSelectedForLiveRadioButton" selected type="radio" name="selectedLivePilot" ng-click="vm.selectedPilotChanged('')" checked> no pilot
+			</label> <br /> <label ng-repeat="pilot in raceService.currentHeat.pilots track by $index"> <input type="radio" name="selectedLivePilot" ng-click="vm.selectedPilotChanged(pilot.uuid)">
+				{{pilot.firstName+' '+pilot.lastName}}<br />
+			</label> <br /> <br />
+			<p>Select a monitor to display live screen content:</p>
+			<br />
+			<div class="button" ng-click="vm.showLiveScreen(screen)" ng-repeat="screen in screens track by $index">MONITOR {{$index+1}}</div>
+		</div>
+		<div id="raceBand" class="contentElement" ng-controller="RaceBandController as c">
+			<div id="raceBandConfigBox">
+				<p>
+					<span>Add or remove Race Bands:</span>
+				</p>
+				<ul id="raceBandList">
+					<li ng-repeat="raceBand in c.service.raceBands track by $index"><input type="text" ng-blur="c.service.raceBandUpdated(raceBand)" ng-model="raceBand.value" />
+						<button ng-click="c.service.delete(raceBand); $event.preventDefault(); $event.stopPropagation();">DELETE</button></li>
+					<li><input placeholder="NEW RACE BAND" type="text" ng-model="c.service.newRaceBand.value" ng-blur="c.service.raceBandCreated()" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="classes" class="contentElement" ng-controller="ClassController as c">
+			<div id="classConfigBox">
+				<p>
+					<span>Add or remove Classes:</span>
+				</p>
+				<ul id="classList">
+					<li ng-repeat="class in c.service.classes | orderBy: '+name' track by $index"><input type="text" ng-blur="c.service.classUpdated(class)" ng-model="class.name" />
+						<button ng-click="c.service.delete(class); $event.preventDefault(); $event.stopPropagation();">DELETE</button></li>
+					<li><input placeholder="NEW CLASS" type="text" ng-model="c.service.newClass.name" ng-blur="c.service.classCreated()" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="tts" class="contentElement" ng-controller="TTSController as c">
+			<div id="ttsConfigBox">
+				<p>
+					<span>Configure text to speech:</span>
+				</p>
+				<label for="ttsCheckbox"> <input id="ttsCheckbox" type="checkbox" ng-model="c.service.ttsEnabled.value" /> enable text to speech
+				</label>
+			</div>
+		</div>
+		<div id="cloud" class="contentElement" ng-controller="CloudController as c" ng-class="(c.service.status.transferPossible && c.service.status.online) ? '' : 'disabled'">
+			<p class="red" ng-hide="c.service.status.transferPossible">
+				Not all of your local data is synchronized to the cloud. Please connect to the internet and want a few minutes, if this message persists, contact <a target="_blank"
+					href="mailto:info@fpvracetracker.com">info@fpvracetracker.com</a> for help.
+			</p>
+			<p class="red" ng-hide="c.service.status.online">You seem to be offline, data transfer is not possible!</p>
+			<div>
+				<p>To move your account to a different computer, please click 'request account transfer'.</p>
+				<p class="red">Your local data will be deleted and can be restored on a different computer.</p>
+				<p>You will receive an e-mail at {{c.userService.user.email}} with a verification code. It can be entered in the form below (on a different computer) to restore all data.</p>
+				<div class="button" ng-click="c.service.accountTransferInit()">
+					<span>REQUEST ACCOUNT TRANSFER</span>
+				</div>
+			</div>
+			<div id="restoreContainer">
+				<div>
+					<p>Please enter the verification code below and make sure your internet connection will not be interrupted.</p>
+					<p>
+						<span>Verification Code:&nbsp;&nbsp;</span><input id="cloudInputField" type="text" ng-model="c.service.verificationCode" />
+					</p>
+					<div class="button" ng-click="c.service.restoreAccount()">
+						<span>RESTORE ACCOUNT NOW</span>
+					</div>
+				</div>
+			</div>
+			<div ng-show="c.service.status.blockScreen" id="blockScreen">
+				<br /> <br /> <br /> <br /> <span class="font-large">{{c.service.status.message}}</span>
+			</div>
+		</div>
+		<div id="pilots" class="contentElement" ng-controller="PilotController as c">
+			<div id="createPilot" class="hidden">
+				<div id="createPilotStatus" class="activateCreate">
+					<span ng-click="c.service.setCreateMode()">CREATE</span>&nbsp;|&nbsp;<span>UPDATE</span>
+				</div>
+				<table>
+					<tr>
+						<td class="firstRow"><span class="font-small">FIRST NAME*:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.firstName" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">LAST NAME*:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.lastName" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">ALIAS:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.alias" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">PHONE:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.phone" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">COUNTRY*:</span></td>
+						<td><select ng-model="c.service.pilot.country" ng-options="country for country in c.service.countries">
+						</select></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">E-MAIL:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.email" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">CLUB:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.club" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">TRANSPONDER ID:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.deviceId" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">PILOT NUMBER:</span></td>
+						<td><input type="text" ng-model="c.service.pilot.pilotNumber" /></td>
+					</tr>
+					<!-- <tr>
+						<td><span class="font-small">RACE BAND 1:</span></td>
+						<td><select ng-model="c.service.pilot.raceBand1"
+							ng-options="raceBand as raceBand.value for raceBand in c.raceBandService.raceBands">
+						</select></td>
+					</tr>
+					<tr ng-class="{disabled: !c.service.pilot.raceBand1}">
+						<td><span class="font-small">RACE BAND 2:</span></td>
+						<td><select ng-model="c.service.pilot.raceBand2"
+							ng-options="raceBand as raceBand.value for raceBand in c.raceBandService.raceBands">
+						</select></td>
+					</tr> -->
+					<tr>
+						<td class="tableSeperator" colspan="2"><span>EVENT</span></td>
+					</tr>
+					<tr ng-class="{disabled: !c.service.canPilotBeAssignedToRace()}">
+						<td><span class="font-small">ASSIGN EVENT:</span></td>
+						<td><select ng-model="c.service.selectedCompetition"
+							ng-options="race as (race.description+ ' ' +race.dateFrom.getDate() + '/'+
+									   (+race.dateFrom.getMonth()+1) +'/'+
+									   race.dateFrom.getFullYear()) for race in c.competitionService.competitions">
+						</select></td>
+					</tr>
+					<tr ng-class="{disabled: !c.service.canPilotBeAssignedToRace()}">
+						<td><span class="font-small">WITH CLASS:</span></td>
+						<td><select ng-model="c.service.selectedClass" ng-class="{'redBorder': (!c.service.selectedClass && c.service.selectedCompetition)}"
+							ng-options="classs as classs.name for classs in c.service.selectedCompetition.classes">
+						</select></td>
+					</tr>
+				</table>
+				<div class="button" ng-click="c.service.save()">
+					<span>SAVE</span>
+				</div>
+				<div class="button" ng-hide="!c.service.mode.update" ng-click="c.service.deletePilot()">
+					<span>DELETE</span>
+				</div>
+				<div class="button" ng-hide="!c.service.mode.update" ng-click="c.service.scanPilot()">
+					<span>SCAN TRANSPONDER {{c.service.scanTimer.value > 0 ? ' ('+c.service.scanTimer.value+')' : ''}}</span>
+				</div>
+				<div class="button" ng-click="c.service.download()">
+					<span>DOWNLOAD LIST</span>
+				</div>
+				<div id="showAddPilot">
+					<div class="btn" ng-click="c.service.showCreate()">
+						<span>CREATE</span>
+					</div>
+				</div>
+				<div id="hideAddPilot" ng-click="c.service.hideCreate()">
+					<span class="font-small">HIDE</span>
+				</div>
+			</div>
+			<div id="list">
+				<input id="pilotFilter" placeholder="FILTER" type="text"
+					ng-model="c.competitionService.nameFilter.text" /> <br />
+				<table>
+					<thead>
+						<tr class="font-small">
+							<td><span>NR</span></td>
+							<td><span>NAME</span></td>
+							<td><span>ALIAS</span></td>
+							<td><span>COUNTRY</span></td>
+							<td><span>E-MAIL</span></td>
+							<td><span>CLUB / TEAM</span></td>
+							<td><span>PHONE</span></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-click="c.service.showUpdate(pilot)" ng-class-odd="'oddRow'" ng-repeat="pilot in c.service.pilots | filter: c.service.pilotFilter track by $index">
+							<td><span>{{pilot.pilotNumber}}</span></td>
+							<td><span>{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span></td>
+							<td><span>{{pilot.alias}}</span></td>
+							<td><span>{{pilot.country}}</span></td>
+							<td><span>{{pilot.email}}</span></td>
+							<td><span>{{pilot.club}}</span></td>
+							<td><span>{{pilot.phone}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="races" class="contentElement visible" ng-controller="RaceController as c">
+			<div id="configureRace-container">
+				<table ng-class="c.service.heatResultExistsInCurrentRound() ? 'locked' : ''">
+					<tr>
+						<td class="tableSeperator" colspan="2"><span>RACE</span></td>
+					</tr>
+					<tr>
+						<td class="col1"><span class="font-small">EVENT:</span></td>
+						<td class="col2"><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.selectedCompetition.description}}</span> <select
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.selectedCompetition" ng-change="c.service.competitionChanged()"
+							ng-options="race as (race.description+ ' ' +race.dateFrom.getDate() + '/'+
+									   (+race.dateFrom.getMonth()+1) +'/'+
+									   race.dateFrom.getFullYear()) for race in c.competitionService.competitions | orderBy: '-date'">
+						</select></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">FORMAT:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.selectedFormat}}</span> <select
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.selectedFormat" ng-change="c.service.formatChanged()"
+							ng-options="format for format in c.service.raceFormats">
+						</select></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">CLASS:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.selectedClass.name}}</span> <select
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.selectedClass" ng-change="c.service.classChanged()"
+							ng-options="class as class.name for class in c.service.selectedCompetition.classes">
+						</select></td>
+					</tr>
+					<tr ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable">
+						<td><span class="font-small">ROUND:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{round}}</span> <select
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-change="c.service.roundSelected()" ng-model="c.service.currentRoundNumber"
+							ng-options="i for i in c.service.availableRoundNumbers" ng-init="c.currentRoundNumber = c.service.availableRoundNumbers[0]">
+						</select></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">TYPE:</span></td>
+						<td><span class="floatLeft">{{c.service.currentRace.type}}</span></td>
+					</tr>
+					<tr>
+						<td class="tableSeperator rounds" colspan="2"><span>ROUND&nbsp;{{c.service.currentRoundNumber}}</span><span
+							ng-hide="!c.service.currentHeat.heatNumber || !c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">&nbsp;&nbsp;&nbsp;HEAT&nbsp;{{c.service.currentHeat.heatNumber}}</span></td>
+					</tr>
+					<tr ng-hide="!c.service.currentRound.description && (c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable)">
+						<td><span class="font-small">DESCRIPTION:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.description}}</span> <input type="text"
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.description" /></td>
+					</tr>
+					<tr class="lockable" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable">
+						<td><span class="font-small">HEATS PER ROUND:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.amountOfHeats}}</span><input type="number"
+							min="1" max="99" ng-change="c.service.heatsPerRoundChanged()" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable"
+							ng-model="c.service.currentRound.amountOfHeats" /></td>
+					</tr>
+					<tr
+						ng-hide="
+						(
+							(!c.service.previousRound.competitionResults || (c.service.previousRound.competitionResults && c.service.previousRound.competitionResults.length == 0)) && 
+							c.service.qualificationResultOfCurrentRace.length == 0 && c.service.currentRace.format.toUpperCase() == 'COMPETITION'
+						) 
+						|| (c.service.currentRace.format.toUpperCase() != 'COMPETITION' && c.service.currentRound.roundNumber < 2) 
+						|| c.service.currentRace.format.toUpperCase() == 'TRAINING' 
+						|| c.service.getRaceStatus().raceStarted 
+						|| c.service.getRaceStatus().raceCloseable">
+						<td><span class="font-small">QUALIFIED PILOTS:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.amountOfQualifiedPilots}}</span><input
+							type="number" min="1" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.amountOfQualifiedPilots" /></td>
+					</tr>
+					<!-- <tr class="lockable"
+						ng-hide="c.service.currentRace.type.toUpperCase() == 'TIME'">
+
+						<td><span class="font-small">OVER TIME:</span></td>
+						<td><span class="floatLeft"
+							ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.overTime}}</span>
+							<input type="number" min="0" 
+							ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable"
+							ng-model="c.service.currentRound.overTime" /></td>
+					</tr> -->
+					<tr class="lockable" ng-hide="c.service.currentRace.type.toUpperCase() == 'TIME'">
+						<td><span class="font-small">AMOUNT OF LAPS:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.amountOfLaps}}</span><input type="number"
+							min="1" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.amountOfLaps" /></td>
+					</tr>
+					<tr class="lockable" ng-hide="c.service.currentRace.type.toUpperCase() == 'TIME'">
+						<td><span class="font-small">OVERTIME:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.overtime}}</span><input type="number"
+							min="0" max="600" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.overtime" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">BLOCKING TIME:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.blockingTime}}</span><input type="number"
+							min="0" max="20" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.blockingTime" /></td>
+					</tr>
+					<tr ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable">
+						<td><span class="font-small">START COUNTDOWN:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.countdown}}</span><input type="number"
+							min="5" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.countdown" /></td>
+					</tr>
+					<tr class="lockable" ng-hide="c.service.currentRace.type.toUpperCase() == 'LAPS'">
+						<td><span class="font-small">RACE DURATION:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.duration}}</span><input type="number"
+							min="1" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.duration" /></td>
+					</tr>
+					<tr>
+						<td><span class="font-small">LAP DISTANCE:</span></td>
+						<td><span class="floatLeft" ng-hide="!c.service.getRaceStatus().raceStarted && !c.service.getRaceStatus().raceCloseable">{{c.service.currentRound.lapDistance}}</span><input type="number"
+							min="0" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-model="c.service.currentRound.lapDistance" /></td>
+					</tr>
+					<tr ng-show="c.service.currentRace.type.toUpperCase() == 'TIME' && (c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable)">
+						<td class="tableSeperator rounds" colspan="2"><span>TIME</span></td>
+					</tr>
+					<tr ng-show="c.service.currentRace.type.toUpperCase() == 'TIME' && (c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable)">
+						<td class="countdownElement" colspan="2"><span class="font-large">{{c.service.durationTimer.countdownValue | date:'mm:ss'}}</span></td>
+					</tr>
+					<tr ng-show="c.service.currentRace.type.toUpperCase() == 'LAPS' && (c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable)">
+						<td class="tableSeperator rounds" colspan="2"><span>LAPS</span></td>
+					</tr>
+					<tr ng-show="c.service.currentRace.type.toUpperCase() == 'LAPS' && (c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable)">
+						<td class="countdownElement" colspan="2"><span class="font-large">{{c.service.getMostLapsInfo()+'/'+c.service.currentRound.amountOfLaps}}</span></td>
+					</tr>
+				</table>
+				<!-- <div class="button"
+					ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable || c.service.getRaceStatus().deviceNotReady"
+					ng-click="c.service.start()">
+					<span>START RACE in {{c.service.currentRound.countdown}}s</span>
+				</div> -->
+				<div class="button" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-click="c.service.fillHeats()">
+					<span>AUTO ASSIGN PILOTS</span>
+				</div>
+				<div class="button" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-click="c.service.saveRound()">
+					<span>SAVE</span>
+				</div>
+				<div class="button" ng-hide="c.service.getRaceStatus().raceStarted || c.service.getRaceStatus().raceCloseable" ng-click="c.service.downloadTimetable()">
+					<span>DOWNLOAD EVENT TIMETABLE</span>
+				</div>
+				<div class="button" ng-hide="!c.service.getRaceStatus().raceStarted" ng-click="c.service.setRaceStopable()">
+					<span>FINISH HEAT</span>
+				</div>
+				<div class="button" ng-hide="!c.service.getRaceStatus().raceCloseable" ng-click="c.service.close()">
+					<span>CLOSE</span>
+				</div>
+				<div class="button" ng-hide="!c.service.getRaceStatus().raceCloseable" ng-click="c.service.download()">
+					<span>DOWNLOAD RESULT</span>
+				</div>
+			</div>
+			<div id="addPilotsList" ng-class="c.service.currentRace.format.toUpperCase() == 'QUALIFYING' ? 'qualifying' : ''">
+				<div ng-show="c.service.currentRace.format.toUpperCase() == 'QUALIFYING'" ng-click="c.service.toggleShowTotalQualificationResult()"
+					ng-class="!c.service.CURRENT_STATUS.showTotalQualificationResult ? 'selected tabHeader borderRight' : 'tabHeader borderRight'">
+					<span>HEATS</span>
+				</div>
+				<div ng-show="c.service.currentRace.format.toUpperCase() == 'QUALIFYING'" ng-click="c.service.toggleShowTotalQualificationResult()"
+					ng-class="c.service.CURRENT_STATUS.showTotalQualificationResult ? 'selected tabHeader' : 'tabHeader'">
+					<span>QUALIFICATION RESULT</span>
+				</div>
+				<br /> <br />
+				<table
+					ng-class="(c.service.currentRound.pilots.length != 0 && c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') ? 'noMarginBottom' : ''"
+					ng-hide="c.service.currentRound.pilots.length == 0" ng-repeat="heat in c.service.currentRound.heats | orderBy:
+					'+heatNumber' track by $index">
+					<thead
+						ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || heat.heatResult || c.service.currentRace.format.toUpperCase() != 'QUALIFYING'">
+						<tr>
+							<td class="tableSeperator heatHeader" colspan="999"><span>HEAT: {{heat.heatNumber}}</span> <input class="datepicker font-small" type="datetime-local" ng-model="heat.startTime">
+								<div ng-show="c.service.isEditableRound()" ng-click="c.service.toogleHeatMenu(heat)" class="menuIcon">
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.restartHeat();$event.stopPropagation()" class="button first">
+										<span>RESTART</span>
+									</div>
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.closeHeat();$event.stopPropagation()" class="button">
+										<span>CLOSE</span>
+									</div>
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.simulateHeat();$event.stopPropagation()" class="button">
+										<span>SIMULATE</span>
+									</div>
+								</div> <!--div ng-click="c.service.toogleHeatMenu(heat)" class="menuIcon">
+								</div>
+								<div class="menuElements">
+									<div ng-show="c.service.heatToEdit == heat"
+										ng-click="$event.stopPropagation()" class="menuElement">
+										<input class="datepicker" type="datetime-local"
+											ng-model="heat.startTime">
+									</div>
+								</div--></td>
+						</tr>
+						<tr class="font-small">
+							<td><span>PILOT</span><span class="right">MANUAL-TIMING KEY</span></td>
+							<td ng-hide="c.service.currentRound.roundNumber == 1"><span>RANK</span></td>
+							<td><span>TRANSPONDER</span></td>
+							<td><span>RACE BAND</span></td>
+							<td ng-hide="c.service.currentRound.roundNumber == 1"><span>TOTAL</span></td>
+							<td ng-repeat="idx in c.service.roundNumberHelperCurrent() track by $index"><span>ROUND {{$index+1}}</span></td>
+						</tr>
+					</thead>
+					<thead ng-hide="heat.heatResult || c.service.currentRace.format.toUpperCase() == 'QUALIFYING'">
+						<tr>
+							<td class="tableSeperator heatHeader" colspan="999"><span>HEAT: {{heat.heatNumber}}</span><input class="datepicker font-small" type="datetime-local" ng-model="heat.startTime">
+								<div ng-show="c.service.isEditableRound()" ng-click="c.service.toogleHeatMenu(heat)" class="menuIcon">
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.restartHeat();$event.stopPropagation()" class="button first">
+										<span>RESTART</span>
+									</div>
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.closeHeat();$event.stopPropagation()" class="button">
+										<span>CLOSE</span>
+									</div>
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.simulateHeat();$event.stopPropagation()" class="button">
+										<span>SIMULATE</span>
+									</div>
+								</div></td>
+						</tr>
+						<tr class="font-small">
+							<td><span>PILOT</span><span class="right">MANUAL-TIMING KEY</span></td>
+							<td
+								ng-hide="(c.service.currentRace.format.toUpperCase() == 'COMPETITION' && c.service.qualificationResultOfCurrentRace.length == 0) || c.service.currentRace.format.toUpperCase() != 'COMPETITION'"><span>RANK</span></td>
+							<td><span>TRANSPONDER</span></td>
+							<td><span>RACE BAND</span></td>
+							<td ng-hide="c.service.qualificationResultOfCurrentRace.length == 0 || c.service.currentRound.roundNumber > 1 || c.service.currentRace.format.toUpperCase() != 'COMPETITION'"><span>QUALI-TIME</span></td>
+
+						</tr>
+					</thead>
+					<thead ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || !heat.heatResult">
+						<tr>
+							<td class="tableSeperator heatHeader" colspan="999"><span>HEAT: {{heat.heatNumber}} [FINISHED]</span>
+								<div ng-show="c.service.isEditableRound()" ng-click="c.service.toogleHeatMenu(heat)" class="menuIcon">
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.restartHeat();$event.stopPropagation()" class="button first">
+										<span>RESTART</span>
+									</div>
+									<div ng-show="c.service.heatToEdit == heat" ng-click="c.service.closeHeat();$event.stopPropagation()" class="button">
+										<span>CLOSE</span>
+									</div>
+								</div></td>
+						</tr>
+						<tr class="font-small">
+							<td><span>RANK</span></td>
+							<td><span>PILOT</span></td>
+							<td ng-hide="c.service.currentRace.format != 'Competition'"><span>LAPS</span></td>
+							<td ng-hide="c.service.currentRace.format != 'Competition'"><span>TOTAL TIME</span></td>
+							<td ng-hide="c.service.currentRace.format == 'Competition'"><span>BEST ROUND</span></td>
+						</tr>
+					</thead>
+					<tbody ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || heat.heatResult">
+						<tr ng-class="heat.pilots.indexOf(pilot) != -1 ? 'added' : ''" ng-click="c.service.clickPilot(heat, pilot)" ng-class-odd="'oddRow'"
+							ng-repeat="pilot in heat.pilots | orderBy: +lapTimeSum track by $index">
+							<td><span>[{{pilot.pilotNumber}}]&nbsp;{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span><span class="right">{{pilot.manualTimingIndex}}</span></td>
+							<td
+								ng-show="(c.service.currentRound.roundNumber > 1 && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') ||
+								(c.service.currentRace.format.toUpperCase() == 'COMPETITION' && c.service.qualificationResultOfCurrentRace.length > 0)"><span>{{pilot.rank}}</span></td>
+							<td><span>{{pilot.deviceId}}</span></td>
+							<td><span>{{pilot.assignedRaceBand.value}}</span></td>
+							<td
+								ng-show="(c.service.currentRound.roundNumber > 1 && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') ||
+								(c.service.qualificationResultOfCurrentRace.length > 0 && c.service.currentRound.roundNumber == 1 && c.service.currentRace.format.toUpperCase() == 'COMPETITION')"><span>{{+pilot.lapTimeSum*1000
+									| date:'mm:ss:sss'}}</span></td>
+							<td ng-hide="c.service.currentRace.format.toUpperCase() != 'QUALIFYING'" ng-repeat="lapTime in pilot.lapTimes track by $index"><span>{{+lapTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+						<tr>
+							<td ng-hide="!c.service.allPreviousHeatsAreFinished()" class="noPadding" colspan="999"><div class="button"
+									ng-hide="(!heat.pilots || heat.pilots.length < 1)  && c.service.currentRace.format.toUpperCase() != 'TRAINING'" ng-click="c.service.startHeat(heat, false)">
+									<span>START HEAT</span><span class="startHeat{{heat.uuid}}" id="startHeatCountdown">5</span>
+								</div></td>
+						</tr>
+					</tbody>
+
+					<tbody
+						ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || !heat.heatResult || c.service.currentRace.format.toUpperCase() == 'COMPETITION'">
+						<tr ng-class-odd="'oddRow'" ng-click="c.service.resultClicked(result, heat)" ng-repeat="result in heat.heatResult.results | orderBy: '+rank' track by $index">
+							<td><span>{{result.rank ? result.rank : 'DIS'}}</span></td>
+							<td><span>{{"[" + result.pilotNumber + "] " +result.pilotName}}</span></td>
+							<td><span>{{result.bestRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+					</tbody>
+
+					<tbody
+						ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || !heat.heatResult || c.service.currentRace.format.toUpperCase() != 'COMPETITION'">
+						<tr ng-class-odd="'oddRow'" ng-click="c.service.resultClicked(result, heat)" ng-repeat="result in heat.heatResult.results | orderBy: '+rank' track by $index">
+							<td><span>{{result.rank ? result.rank : 'DIS'}}</span></td>
+							<td><span>{{"[" + result.pilotNumber + "] " +result.pilotName}}</span></td>
+							<td><span>{{result.amountOfLaps}}</span></td>
+							<td><span>{{result.totalTime*1000 | date:'mm:ss:sss'}}</span></td>
+
+						</tr>
+					</tbody>
+				</table>
+				<table id="qualificationResultTable"
+					ng-hide="!c.service.currentRace.qualificationResults.length > 0  || c.service.currentRound.pilots.length == 0 || !c.service.CURRENT_STATUS.showTotalQualificationResult || c.service.currentRace.format.toUpperCase() != 'QUALIFYING'">
+					<thead>
+						<tr class="font-small">
+							<td><span>PILOT</span></td>
+							<td><span>RANK</span></td>
+							<td><span>TOTAL</span></td>
+							<td ng-repeat="idx in c.service.roundNumberHelper() track by $index"><span>ROUND {{$index+1}}</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class="heat.pilots.indexOf(pilot) != -1 ? 'added' : ''" ng-class-odd="'oddRow'" ng-repeat="pilot in c.service.currentRace.qualificationResults | orderBy: +rank track by $index">
+							<td><span>[{{pilot.pilotNumber}}]{{" "+pilot.pilotName}}</span></td>
+							<td><span>{{pilot.rank}}</span></td>
+							<td><span>{{+pilot.lapTimesSum*1000 | date:'mm:ss:sss'}}</span></td>
+							<td ng-repeat="lapTime in pilot.lapTimes track by $index"><span>{{+lapTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+						<tr>
+							<td colspan="99">
+								<div class="button" ng-click="c.service.downloadQualificationResult()">
+									DOWNLOAD RESULT
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br ng-hide="c.service.currentRound.pilots.length == 0" />
+				<table id="availablePilots"
+					ng-hide="(c.service.CURRENT_STATUS.showTotalQualificationResult && c.service.currentRace.format.toUpperCase() == 'QUALIFYING') || c.service.selectedCompetition.pilots.length == c.service.currentRound.pilots.length">
+					<thead>
+						<tr>
+							<td class="tableSeperator heatHeader" colspan="999"><span>NOT ASSIGNED</span></td>
+						</tr>
+						<tr>
+							<td colspan="999"><input id="pilotFilter" placeholder="FILTER" type="text" ng-model="c.competitionService.nameFilter.text" /></td>
+						</tr>
+						<tr class="font-small">
+							<td><span>PILOT NR.</span></td>
+							<td><span>NAME</span></td>
+							<td><span>TRANSPONDER</span></td>
+							<td><span>CLASS</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ng-class="c.service.currentRound.pilots.indexOf(pilot) != -1 ? 'added' : ''" -->
+						<tr ng-click="c.service.clickPilot(null, pilot)" ng-class-odd="'oddRow'"
+							ng-repeat="pilot in c.service.selectedCompetition.pilots | orderBy: c.service.pilotSelectionOrder | filter: c.service.pilotFilter track by $index">
+							<td><span>{{pilot.pilotNumber}}</span></td>
+							<td><span>{{pilot.firstName}}&nbsp;{{pilot.lastName}}</span></td>
+							<td><span>{{pilot.deviceId}}</span></td>
+							<td><span>{{pilot.classs.name}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="raceResult" class="removed">
+				<table>
+					<thead>
+						<tr class="font-small">
+							<td><span>RANK</span></td>
+							<td><span>PILOT</span><span class="right">MANUAL-TIMING KEY</span></td>
+							<td><span>LAPS</span></td>
+							<td><span>TOTAL</span></td>
+							<td><span>AVERAGE</span></td>
+							<td><span>BEST</span></td>
+							<td><span>LAST</span></td>
+							<td ng-show="c.service.currentRound.lapDistance > 0"><span>KM/H</span></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class-odd="'oddRow'" ng-repeat="raceResult in c.service.raceResult | orderBy: c.service.resultOrder">
+							<td><span>{{raceResult.rank}}</span></td>
+							<td><span>{{"[" + raceResult.pilotNumber + "] " +raceResult.pilotName}}</span><span class="right">{{raceResult.manualTimingIndex}}</span></td>
+							<td><span>{{raceResult.amountOfLaps}}</span></td>
+							<td><span>{{raceResult.totalTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.averageRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.bestRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.lastRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td ng-show="c.service.currentRound.lapDistance > 0 && raceResult.lastRoundTime"><span>{{(c.service.currentRound.lapDistance/1000) / (raceResult.lastRoundTime/3600) | number:1}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="movePilotDialogContainer" ng-hide="!c.service.pilotToMove">
+				<div id="movePilotDialog">
+					<p>MOVE PILOT TO</p>
+					<div class="button" ng-hide="heat.heatResult || c.service.isHeatFull(heat) || c.service.pilotToMoveOrigin == heat" ng-click="c.service.movePilot(heat)"
+						ng-repeat="heat in c.service.currentRound.heats">
+						<span>HEAT:&nbsp;{{heat.heatNumber}}</span>
+					</div>
+					<div class="button" ng-click="c.service.movePilot(null)">
+						<span>NOT ASSIGNED</span>
+					</div>
+					</br>
+					<div class="button" ng-click="c.service.cancelMovePilot()">
+						<span>CANCEL</span>
+					</div>
+				</div>
+			</div>
+			<div id="editResultDialogContainer" ng-hide="!c.service.resultToEdit">
+				<div id="editResultDialog">
+					<table>
+						<thead>
+							<tr class="font-small">
+								<td><span>PILOT</span></td>
+								<td><span>LAP NUMBER</span></td>
+								<td><span>LAP TIME</span></td>
+								<td><span>PENALTY SECONDS</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-class-odd="'oddRow'" ng-repeat="lap in c.editLapsService.laps | orderBy: c.editLapsService.lapResultOrder">
+								<td><span>{{lap.pilotName}}</span></td>
+								<td><span>{{lap.lapNumber}}</span></td>
+								<td><span>{{lap.time*1000 | date:'mm:ss:sss'}}</span></td>
+								<td><input type="number" ng-model="lap.penalty" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="button" ng-click="c.service.savePenalty()">
+						<span>SAVE</span>
+					</div>
+					<div class="button" ng-click="c.service.disqualify()">
+						<span ng-hide="c.service.resultToEdit.disqualified">DISQUALIFY</span> <span ng-hide="!c.service.resultToEdit.disqualified">REMOVE DISQUALIFICATION</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

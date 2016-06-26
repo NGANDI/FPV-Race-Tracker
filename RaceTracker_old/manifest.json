@@ -1,0 +1,15 @@
+{
+  	"name": "FPV Race Tracker",
+  	"description": "FPV Race Tracker",
+  	"version": "0.3.9.4",
+  	"minimum_chrome_version": "42.0.2311",
+  	"manifest_version": 2,
+	"permissions": ["unlimitedStorage", "serial", "system.display", "tts", "http://localhost/", 
+		"http://cloud.fpvracetracker.com/", "https://cloud.fpvracetracker.com/", "identity", "identity.email"],
+  	"app": {
+    		"background": {
+      			"scripts": ["appconfig.js"]
+    		}
+  	},
+  	"icons": { "256": "img/logo256_2.png",  "128": "img/logo128_2.png" }
+}

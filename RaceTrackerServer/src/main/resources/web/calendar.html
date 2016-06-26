@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="calendar">
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<link rel="stylesheet" media="screen" href="styles/angular-csp.css">
+<link rel="stylesheet" media="screen" href="styles/calendar/main.css">
+<script type="text/javascript" src="script/js/lib/angular.min.js"></script>
+<script type="text/javascript" src="script/js/calendar/ICalendar.js"></script>
+<script type="text/javascript" src="script/js/calendar/CalendarController.js"></script>
+<script type="text/javascript" src="script/js/calendar/init.js"></script>
+</head>
+<body ng-controller="CalendarController" id="calendar">
+	<div id="calendarMenu">
+		<input placeholder="ENTER NAME OR COUNTRY" class="filter" ng-model="search.$" type="text" class="" />
+	</div>
+	<div id="calendarContent">
+		<div class="calendarMonth" ng-repeat="onlineEventGroup in onlineEventGroups | orderBy: '+month' track by $index">
+			<span class="monthSpan">{{onlineEventGroup.month | date:"MMMM yyyy"}}</span><br />
+			<div title="click for more information" ng-class="{new : event.dateFrom > now, old: event.dateTo < now, active: (now > event.dateFrom && now < event.dateTo)}" class="calendarEntry"
+				ng-click="vm.openEvent(event)" ng-class-odd="'oddRow'" ng-repeat="event in onlineEventGroup.onlineEvents | filter:search | orderBy: '+dateFrom' track by $index">
+				<div class="eventDate">
+					{{event.dateFrom | date:"d'.'MMM"}}-{{event.dateTo | date:"d'.'MMM"}}<br />{{event.location}}
+				</div>
+				<div class="eventName">{{event.description}}</div>
+				<div ng-hide="event.dateTo < now" ng-click="vm.showRegistration(event); $event.preventDefault(); $event.stopPropagation();" class="registerButton">REGISTER</div>
+				<div ng-class="event.dateTo < now ? 'eventPilots right' : 'eventPilots'" title="registered pilots" ng-hide="!event.amountOfRegisteredPilots || event.amountOfRegisteredPilots == 0">
+					<div class="icon"></div>
+					<span>{{event.amountOfRegisteredPilots}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

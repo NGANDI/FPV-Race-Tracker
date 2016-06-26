@@ -1,0 +1,19 @@
+#newEventBox {
+	
+	#newEventNavigation {
+		position: absolute;
+		left: 40px;
+		top: 15px;
+		width: calc(100% - 50px);
+	}
+	
+	.newEventBox {
+		position: absolute;
+		left: 40px;
+		top: 70px;
+		width: calc(100% - 40px);
+		height: calc(100% - 70px);
+		overflow-y: auto;
+	
+	}
+}

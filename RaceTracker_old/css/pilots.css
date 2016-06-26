@@ -1,0 +1,184 @@
+#pilots {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.redBorder {
+	border: 1px solid red;
+}
+
+#pilots #createPilot {
+	position: relative;
+	width: 400px;
+	float: left;
+	height: 100%;
+	overflow: hidden;
+	border-right: 1px solid whitesmoke;
+	transition: margin-left 0.7s;
+}
+
+#showAddPilot {
+	display: none;
+}
+
+#createPilot.hidden #showAddPilot {
+	display: block !important;
+	position: absolute;
+	width: 60px;
+	height: 100%;
+	left: 340px;
+	top: 0;
+	box-shadow: inset 0 0 0 1000px rgba(204, 202, 207, 0.05);
+	background-color: rgba(255,255,255,1);
+	cursor: pointer;
+}
+
+#createPilot.hidden #hideAddPilot {
+	display: none;
+}
+
+#hideAddPilot {
+	position: absolute;
+	width: 50px;
+	height: 30px;
+	line-height: 30px;
+	left: 350px;
+	top: 10px;
+	cursor: pointer;
+}
+
+#showAddPilot .btn {
+	position: relative;
+	top: 20px;
+	left: 40px;
+	width: 100px;
+	height: 43px;
+	line-height: 43px;
+	font-size: 16px;
+	text-align: center;
+	background-color: rgba(204, 202, 207, 0.5);
+	border: 1px solid black;
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+}
+
+
+#showAddPilot .btn:hover {
+	left: 43px;
+}
+
+#pilots #createPilot.hidden {
+	margin-left: -350px;
+}
+
+#pilots #createPilot #createPilotStatus {
+	position: relative;
+	width: 400px;
+	text-align: center;
+	margin-top: 5%;
+	width: 400px;
+}
+
+#pilots #createPilot #createPilotStatus.activateCreate span:nth-child(2)
+	{
+	opacity: 0.2;
+}
+
+#pilots #createPilot #createPilotStatus.activateUpdate span:first-of-type
+	{
+	opacity: 0.2;
+	cursor: pointer;
+}
+
+#pilots #createPilot table {
+	margin-top: 10px;
+	width: 370px;
+	margin-left: 15px;
+}
+
+#pilots #createPilot td.firstRow {
+	width: 140px;
+}
+
+#pilots #createPilot .button {
+	margin-top: 20px;
+	width: 175px;
+	margin-left: 15px;
+  	float: left;
+}
+
+#pilots #createPilot select {
+	width: 100%;
+	padding: 2px 10px;
+	font-size: inherit;
+}
+
+#pilots #createPilot select .allreadyAssigned {
+	background-color: rgba(97, 192, 71, 0.72);
+}
+
+#pilots #createPilot table input {
+	width: calc(100% - 20px);
+	padding: 2px 10px;
+	font-size: inherit;
+}
+
+#pilots #createPilot table span {
+	float: right;
+	margin-right: 25px;
+	color: rgb(76, 76, 76);
+}
+
+#pilots #list {
+	position: relative;
+	width: auto;
+	overflow-x: auto;
+	height: 100%;
+}
+
+#pilots #list #pilotFilter {
+	width: 35%;
+	margin-left: 10px;
+}
+
+#pilots #list table {
+	width: calc(100% - 10px);
+	margin-left: 10px;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+#pilots #list table thead td {
+	padding-bottom: 10px;
+}
+
+#pilots #list table span {
+	margin-left: 5px;
+}
+
+#pilots #list table tbody span {
+	color: rgb(16, 16, 16);
+}
+
+#pilots #list table td {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+#pilots #list table tr {
+	cursor: pointer;
+	transition: margin-left 0.2s;
+}
+
+#pilots #list table tbody tr {
+	border-left: 1px solid rgba(0,0,0,0);
+}
+
+#pilots #list table tbody tr:hover {
+	border-left: 1px solid black;
+}
+
+#pilots #list table .oddRow {
+	background-color: rgba(142, 140, 140, 0.22);
+}

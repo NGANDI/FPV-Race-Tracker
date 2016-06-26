@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="onlineResults">
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<link rel="stylesheet" media="screen" href="styles/angular-csp.css">
+<link rel="stylesheet" media="screen" href="styles/result/main.css">
+<script type="text/javascript" src="script/js/lib/angular.min.js"></script>
+<script type="text/javascript" src="script/js/result/ClassPilots.js"></script>
+<script type="text/javascript" src="script/js/result/IRaceResult.js"></script>
+<script type="text/javascript" src="script/js/result/ResultController.js"></script>
+<script type="text/javascript" src="script/js/result/init.js"></script>
+</head>
+<body ng-controller="ResultController" id="results">
+	<div id="resultView" ng-hide="showError">
+		<div id="resultHeader">
+			<table class="resultTable">
+				<tr class="bold">
+					<td><span>{{competition.description}}</span></td>
+				</tr>
+				<tr>
+					<td><span>{{competition.location}}</span></td>
+				</tr>
+				<tr class="smaller">
+					<td><span>{{competition.dateFrom | date:"d'.'MMM yyyy',' h:mma"}}&nbsp;-&nbsp;{{competition.dateTo | date:"d'.'MMM yyyy',' h:mma"}}</span></td>
+				</tr>
+			</table>
+		</div>
+		<div class="seperator"></div>
+		<div id="hidePilotsToggle" ng-click="vm.toggleHidePilots()">
+			<span ng-show="showPilots == true">hide pilots</span><span ng-show="showPilots == false">show pilots</span>
+		</div>
+		<div id="pilots" ng-show="showPilots == true">
+			<div class="classBox" ng-repeat="classPilots in classPilotsList track by $index">
+				<div class="classHeader">
+					<span>{{classPilots.classs.name}}</span><span class="amountOfPilots">{{classPilots.pilots.length}} pilots</span>
+				</div>
+				<div class="pilotBox" ng-repeat="pilot in classPilots.pilots | orderBy: '+country' track by $index">
+					<div class="avatar"></div>
+					<div class="pilotInfo">
+						<span class="countrySpan">{{pilot.country}}</span><br /> <span ng-hide="!pilot.alias || pilot.alias.length < 1">{{pilot.alias}}<br /></span><span>{{pilot.firstName+' '+pilot.lastName}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="resultMenu" ng-class="showPilots == true ? 'showPilots' : ''">
+			<div class="menuEntry">
+				<span>TRAINING</span>
+				<div ng-click="vm.selectRace(race)" ng-repeat="race in races | filter: vm.filterTraining track by $index" class="subMenuElement">{{race.classs.name}}</div>
+			</div>
+			<div class="menuEntry">
+				<span>QUALIFYING</span>
+				<div ng-click="vm.selectRace(race)" ng-repeat="race in races | filter: vm.filterQualifying track by $index" class="subMenuElement">{{race.classs.name}}</div>
+			</div>
+			<div class="menuEntry">
+				<span>COMPETITION</span>
+				<div ng-click="vm.selectRace(race)" ng-repeat="race in races | filter: vm.filterCompetition track by $index" class="subMenuElement">{{race.classs.name}}</div>
+			</div>
+		</div>
+		<div id="resultContent" ng-class="showPilots == true ? 'showPilots' : ''">
+			<div class="resultDescription" ng-hide="!selectedRace">
+				{{selectedRace.format+', '+selectedRace.classs.name+' ('+selectedRace.type+')'}}<br />
+			</div>
+
+			<div id="finalQualifyingResult" ng-show="selectedRace.format == 'Qualifying'">
+				<table>
+					<thead>
+						<tr class="smaller">
+							<td><span>PILOT</span></td>
+							<td><span>RANK</span></td>
+							<td><span>TOTAL</span></td>
+							<td ng-repeat="idx in vm.roundNumberArray() track by $index"><span>ROUND {{$index+1}}</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class-odd="'oddRow'" ng-repeat="pilot in selectedRace.qualificationResults | orderBy: '+rank' track by $index">
+							<td><span>[{{pilot.pilotNumber}}]&nbsp;{{pilot.pilotName}}</span></td>
+							<td><span>{{pilot.rank}}</span></td>
+							<td><span>{{+pilot.lapTimesSum*1000 | date:'mm:ss:sss'}}</span></td>
+							<td ng-repeat="lapTime in pilot.lapTimes track by $index"><span>{{+lapTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+						<tr>
+							<td class="header" colspan="999"><span>&nbsp;</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div ng-repeat="round in selectedRace.rounds | orderBy: '-roundNumber'">
+				<table ng-repeat="heat in round.heats | orderBy: '+heatNumber'">
+					<thead>
+						<tr>
+							<td class="resultHeader" colspan="999"><span>{{'ROUND: '+round.roundNumber+', HEAT: '+heat.heatNumber}}</span><span class="heatStartTime">{{heat.startTime | date:"d'.'MMM yyyy','
+									h:mma"}}</span></td>
+						</tr>
+						<tr class="smaller" ng-hide="!heat.heatResult || !heat.heatResult.results || !heat.heatResult.results.length > 0">
+							<td><span>RANK</span></td>
+							<td><span>PILOT</span></td>
+							<td><span>LAPS</span></td>
+							<td><span>TOTAL</span></td>
+							<td><span>AVERAGE</span></td>
+							<td><span>BEST</span></td>
+							<td><span>LAST</span></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-class-odd="'oddRow'" ng-hide="!heat.heatResult || !heat.heatResult.results || !heat.heatResult.results.length > 0" ng-repeat="raceResult in heat.heatResult.results | orderBy: '+rank'">
+							<td><span>{{raceResult.rank ? raceResult.rank : 'DIS'}}</span></td>
+							<td><span>{{raceResult.pilotName}}</span></td>
+							<td><span>{{raceResult.amountOfLaps}}</span></td>
+							<td><span>{{raceResult.totalTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.averageRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.bestRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+							<td><span>{{raceResult.lastRoundTime*1000 | date:'mm:ss:sss'}}</span></td>
+						</tr>
+						<tr class="noResult" ng-show="!heat.heatResult || !heat.heatResult.results || !heat.heatResult.results.length > 0">
+							<td colspan="999"><span>no result found.</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="resultNotPossible" ng-show="showError">
+		<span>We are sorry, retrieving a result is not possible!</span><br /> <span>Please contact the provider of this website or <a target="_blank" href="mailto:info@fpvracetracker.com">info@fpvracetracker.com</a>!
+		</span>
+	</div>
+</body>
+</html>
+

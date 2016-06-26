@@ -1,0 +1,50 @@
+#welcome {
+	position: fixed;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+	padding: 10px;
+	background-color: white;
+	z-index: 100;
+	text-align: center;
+	background-image: url("../img/logo_big.png");
+	background-size: 75%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#welcome textarea {
+	width: calc(100% - 30px);
+	height: calc(100% - 280px);
+	left: 10px;
+	padding: 5px;
+	resize: none;
+	position: absolute;
+	bottom: 5px;
+	border: 1px solid rgba(150, 150, 150, 0.53);
+    background-color: rgba(0,0,0,0);
+}
+
+#welcome #login {
+	width: 100%;
+	padding: 10px 0;
+}
+
+#welcome table {
+	width: 300px;
+	margin-left: calc(50% - 150px);
+}
+
+#welcome .tableSeperator:after {
+	width: 300px;
+	left: calc(50% - 150px);
+	margin-top: 20px;
+}
+
+#welcome table input {
+	width: 100%;
+}
+
+#welcome .header {
+	font-weight: bold;
+	padding-bottom: 5px;
+}

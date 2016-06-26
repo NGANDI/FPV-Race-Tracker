@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="appScreenLive">
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<script type="text/javascript" src="script/js/lib/angular.min.js"></script>
+<script type="text/javascript"
+	src="script/js/lib/angular-indexed-db.min.js"></script>
+<script type="text/javascript" src="script/js/main.js"></script>
+<link rel="stylesheet" media="screen"
+	href="css/liveScreen/liveScreenMain.css">
+<link rel="stylesheet" media="screen" href="css/angular-csp.css">
+
+</head>
+<body ng-controller="LiveScreenController">
+	<div ng-hide="!windowConfig.showLiveResultList"
+		id="liveResultContainer">
+		<div class="resultRow row0">
+			<div class="resultCol col1">
+				<span>pos.</span>
+			</div>
+			<div class="resultCol col2">
+				<span>pilot</span>
+			</div>
+			<div class="resultCol col3">
+				<span>total time</span>
+			</div>
+			<div class="resultCol col4">
+				<span>lap</span>
+			</div>
+		</div>
+		<div ng-class="'resultRow row'+{{result.rank ? result.rank : ' '}}"
+			ng-repeat="result in raceResults | orderBy: '+rank'"
+			ng-if="result.rank">
+			<div class="resultCol col1">{{result.rank}}</div>
+			<div class="resultCol col2">{{result.pilotName}}</div>
+			<div class="resultCol col3">{{result.totalTime*1000 |
+				date:'mm:ss:sss'}}</div>
+			<div class="resultCol col4">{{result.amountOfLaps}}</div>
+		</div>
+	</div>
+
+	<div ng-hide="!windowConfig.currentLivePilotUUID"
+		id="liveSingleResultContainer">
+		<div class="pos">
+			<span>pos.</span>
+			<div class="font-large">{{singleResult.rank+'/'+currentHeat.pilots.length}}</div>
+		</div>
+		<div class="name">
+			<span>pilot</span>
+			<div>{{singleResult.pilotName}}</div>
+		</div>
+		<div class="currentLap">
+			<span>lap</span> <span ng-if="!showLapTime">{{singleResult.amountOfLaps+1}}</span><span
+				ng-if="showLapTime">{{singleResult.amountOfLaps}}</span><span
+				ng-if="currentRace.type.toUpperCase() == 'LAPS'">{{'/'+currentRound.amountOfLaps}}</span>
+			<div ng-if="showLapTime">{{singleResult.lastRoundTime}}</div>
+			<div ng-if="!showLapTime">{{lapTimerValue | date:'mm:ss:sss'}}</div>
+		</div>
+		<div class="bestLap">
+			<span>best lap</span>
+			<div>{{singleResult.bestRoundTime}}</div>
+		</div>
+	</div>
+</body>
+</html>
+

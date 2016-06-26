@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "./scripts/js/",
+        "rootDir": "./scripts/ts/",
+        "sourceMap": false,
+        "watch": true
+    }
+}

@@ -1,0 +1,52 @@
+/* line 3, ../scss/notifications.scss */
+#notificationContainer {
+  position: fixed;
+  z-index: 99999;
+  bottom: 0px;
+  left: 5px;
+  width: calc(100% - 30px);
+  cursor: pointer;
+}
+/* line 11, ../scss/notifications.scss */
+#notificationContainer .notification {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease-in-out;
+  width: 100%;
+  padding: 10px;
+  background-color: red;
+  font-size: 14px;
+  color: #2D2E33;
+  margin-bottom: 1px;
+}
+/* line 21, ../scss/notifications.scss */
+#notificationContainer .notification .type {
+  font-weight: bold;
+}
+/* line 26, ../scss/notifications.scss */
+#notificationContainer .notification.fade {
+  opacity: 0 !important;
+}
+/* line 30, ../scss/notifications.scss */
+#notificationContainer .notification.n1 {
+  /* success */
+  background-color: #EFFEB9;
+  border: 1px solid #9EB25B;
+}
+/* line 34, ../scss/notifications.scss */
+#notificationContainer .notification.n2 {
+  /* info */
+  background-color: #D1E4F3;
+  border: 1px solid #6A88A2;
+}
+/* line 38, ../scss/notifications.scss */
+#notificationContainer .notification.n3 {
+  /* warn */
+  background-color: #FFE9AD;
+  border: 1px solid #D6B66B;
+}
+/* line 42, ../scss/notifications.scss */
+#notificationContainer .notification.n4 {
+  /* error */
+  background-color: #FCCAC1;
+  border: 1px solid #AE6C60;
+}

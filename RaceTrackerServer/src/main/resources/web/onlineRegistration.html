@@ -1,0 +1,24 @@
+<html>
+<head>
+<script>
+	function pilotRegistered(x) {
+		//console.log("transmitted: ", x);
+	}
+	document.addEventListener("DOMContentLoaded", function() {
+		window.location.search.replace('?', '').split("&").forEach(function(param) {
+			var param = param.split("=");
+			if (param && param.length == 2) {
+				if (param[0] == "key") {
+					var site = "http://localhost:8080/web/registration.html?key=" + param[1];
+					//var site = "https://cloud.fpvracetracker.com/web/registration.html?key=" + param[1];
+					document.getElementById('registrationIFrame').src = site;
+				}
+			}
+		});
+	}, false);
+</script>
+</head>
+<body style="background-color: darkslategrey; padding: 20px;">
+	<iframe id="registrationIFrame" style="position: absolute; left: calc(50% - 205px);" width="410" height="740"></iframe>
+</body>
+</html>

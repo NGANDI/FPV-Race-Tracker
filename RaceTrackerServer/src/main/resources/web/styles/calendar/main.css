@@ -1,0 +1,148 @@
+body {
+	position: absolute;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	height: 100%;
+	width: 100%;
+	color: rgb(76, 76, 76);
+	background-color: white;
+	overflow: hidden;
+	margin: 0 !important;
+	top: 0;
+	left: 0;
+	top: 0;
+	user-select: none;
+}
+
+.filter {
+    height: 40px;
+    text-transform: uppercase;
+    width: calc(100% - 60px);
+    padding: 0px 20px;
+    position: absolute;
+    font-size: 1em;
+    color: dimgrey;
+    top: 10px;
+    left: 10px;
+}
+
+#calendarMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+}
+
+#calendarContent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+    top: 70px;
+    height: calc(100% - 90px);
+	padding: 10px;
+	overflow: auto;
+	width: calc(100% - 20px);
+}
+
+.menuElement {
+	float: left;
+	border: 1px solid black;
+	cursor: pointer;
+	text-overflow: ellipsis;
+}
+
+.eventName {
+	position: absolute;
+	width: 40%;
+	text-align: left;
+	left: 25%;
+	line-height: 40px;
+	font-weight: bold;
+}
+
+.eventDate {
+	position: absolute;
+	left: 10px;
+	line-height: 20px;
+}
+
+.registerButton {
+	position: absolute;
+	right: 15px;
+	height: 35px;
+	margin-top: 7.5px;
+	top: 0;
+	padding: 0px 10px;
+	background-color: rgba(142, 140, 140, 0.8) !important;
+	line-height: 35px;
+	color: white;
+}
+
+.registerButton:hover {
+	color: dimgrey;
+}
+
+.eventPilots {
+	position: absolute;
+	right: 120px;
+	top: 0px;
+	height: 50px;
+	width: 60px;
+	height: 50px;
+}
+
+.eventPilots.right {
+    right: 10px !important;
+}
+
+.eventPilots .icon {
+	position: relative;
+	margin-top: 8px;
+	height: 20px;
+	margin-left: 35px;
+	width: 15px;
+	background-image: url('../../img/avatar.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: top;
+}
+
+.eventPilots span {
+	position: relative;
+	float: right;
+	margin-right: 10px;
+}
+
+.monthSpan {
+	font-weight: bold;
+    line-height: 30px;
+}
+
+.calendarMonth {
+	width: calc(100% - 10px);
+	margin-top: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.09);
+	padding: 5px;
+}
+
+.calendarEntry {
+	position: relative;
+	width: 100%;
+	padding: 5px 0px;
+	height: 40px;
+	border: 1px solid rgba(142, 140, 140, 0.22);
+	background-color: rgba(142, 140, 140, 0.22);
+	cursor: pointer;
+}
+
+.new {
+}
+
+.active {
+	background-color: rgba(2, 150, 2, 0.32);
+}
+
+.calendarEntry:hover {
+	box-shadow: 0px 0px 2px grey;
+}

@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<link rel="stylesheet" media="screen" href="styles/event/main.css">
+</head>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var resultKey = "";
+		var showPilots = false;
+		var registrationKey = "";
+		var place = "";
+
+		window.location.search.replace('?', '').split("&").forEach(
+				function(param) {
+					var param = param.split("=");
+					if (param && param.length == 2) {
+						if (param[0] == "resultKey") {
+							resultKey = param[1];
+						} else if (param[0] == "registrationKey") {
+							registrationKey = param[1];
+						} else if (param[0] == "place") {
+							place = param[1];
+						} else if (param[0] == "showPilots") {
+							showPilots = param[1];
+						}
+					}
+				});
+
+		var host = "http://localhost:8080";
+		//var host = "https://cloud.fpvracetracker.com";
+
+		var url = host + "/web/event.html?resultKey=" + resultKey
+				+ "&showPilots=" + showPilots + "&registrationKey="
+				+ registrationKey + "&place=" + place;
+		document.getElementById('eventIFrame').src = url;
+
+	}, false);
+</script>
+</head>
+<body style="background-color: darkslategrey;">
+	<iframe id="eventIFrame" style="position: absolute; left: calc(50% - 450px);" width="900" height="1052"></iframe>
+</body>
+</html>

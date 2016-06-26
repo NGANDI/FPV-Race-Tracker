@@ -1,0 +1,22 @@
+<div class="navigation" id="newEventNavigation">
+	<div class="button" ng-click="c.selectEventNavigation()" ng-class="c.isEventNavigationSelected()">
+		<span>{{lang.language.json.event.event}}</span>
+	</div>
+	<div class="button" ng-click="c.selectPilotsNavigation()" ng-class="c.isPilotsNavigationSelected()">
+		<span>{{lang.language.json.event.pilots}}</span>
+	</div>
+	<div class="button" ng-click="c.selectRaceNavigation()" ng-class="c.isRaceNavigationSelected()">
+		<span>{{lang.language.json.event.race}}</span>
+	</div>
+	<div class="button" ng-click="c.selectRoundsNavigation()" ng-class="c.isRoundsNavigationSelected()">
+		<span>{{lang.language.json.event.rounds}}</span>
+	</div>
+	<div class="button" ng-click="c.selectHeatsNavigation()" ng-class="c.isHeatsNavigationSelected()">
+		<span>{{lang.language.json.event.heats}}</span>
+	</div>
+</div>
+<div class="newEventBox" ng-show="c.isEventNavigationSelected()" ng-include="'html/newEventBox_Event.html'"></div>
+<div class="newEventBox" ng-show="c.isRaceNavigationSelected()" ng-include="'html/newEventBox_Race.html'"></div>
+<div class="newEventBox" ng-show="c.isRoundsNavigationSelected()" ng-include="'html/newEventBox_Rounds.html'"></div>
+<div class="newEventBox" ng-show="c.isPilotsNavigationSelected()" ng-include="'html/newEventBox_Pilots.html'"></div>
+<div class="newEventBox" ng-show="c.isHeatsNavigationSelected()" ng-include="'html/newEventBox_Heats.html'"></div>

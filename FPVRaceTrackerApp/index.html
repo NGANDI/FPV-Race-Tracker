@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" ng-app="main" ng-csp>
+<head>
+<meta charset="utf-8">
+<title>FPV RACE TRACKER</title>
+<link rel="stylesheet" href="scripts/libs/angular/angular-csp.css">
+<script src="scripts/libs/angular/angular.js"></script>
+<script src="scripts/libs/angular/angular-indexed-db.min.js"></script>
+
+<link rel="stylesheet" href="styles/css/shared.css">
+<link rel="stylesheet" href="styles/css/mainMenu.css">
+<link rel="stylesheet" href="styles/css/subMenu.css">
+<link rel="stylesheet" href="styles/css/newEvent.css">
+<link rel="stylesheet" href="styles/css/newPilot.css">
+<link rel="stylesheet" href="styles/css/settingsLanguage.css">
+<link rel="stylesheet" href="styles/css/notifications.css">
+
+<script src="scripts/js/main_model/StoredObject.js"></script>
+<script src="scripts/js/main_model/Language.js"></script>
+<script src="scripts/js/main_model/Notification.js"></script>
+<script src="scripts/js/main_model/MainConfig.js"></script>
+<script src="scripts/js/main_model/LogEntry.js"></script>
+<script src="scripts/js/main_model/Enums.js"></script>
+<script src="scripts/js/main_model/Vendor.js"></script>
+<script src="scripts/js/main_model/Transponder.js"></script>
+<script src="scripts/js/main_model/User.js"></script>
+<script src="scripts/js/main_model/Club.js"></script>
+<script src="scripts/js/main_model/Pilot.js"></script>
+<script src="scripts/js/main_model/Event.js"></script>
+
+<script src="scripts/js/main_service/DatabaseService.js"></script>
+<script src="scripts/js/main_service/LogService.js"></script>
+<script src="scripts/js/main_service/NotificationService.js"></script>
+<script src="scripts/js/main_service/MainConfigService.js"></script>
+<script src="scripts/js/main_service/VendorService.js"></script>
+<script src="scripts/js/main_service/LanguageService.js"></script>
+<script src="scripts/js/main_service/LoginService.js"></script>
+<script src="scripts/js/main_service/MenuService.js"></script>
+<script src="scripts/js/main_service/ClubService.js"></script>
+<script src="scripts/js/main_service/EventService.js"></script>
+<script src="scripts/js/main_service/PilotService.js"></script>
+
+<script src="scripts/js/main_controller/NotificationController.js"></script>
+<script src="scripts/js/main_controller/LanguageController.js"></script>
+<script src="scripts/js/main_controller/LoginController.js"></script>
+<script src="scripts/js/main_controller/MenuController.js"></script>
+<script src="scripts/js/main_controller/NewEventController.js"></script>
+<script src="scripts/js/main_controller/NewClubController.js"></script>
+<script src="scripts/js/main_controller/EditClubController.js"></script>
+<script src="scripts/js/main_controller/ClubListController.js"></script>
+<script src="scripts/js/main_controller/NewPilotController.js"></script>
+<script src="scripts/js/main_controller/EditPilotController.js"></script>
+<script src="scripts/js/main_controller/PilotListController.js"></script>
+
+<script src="scripts/js/main_init.js"></script>
+
+</head>
+<body id="body" ng-controller="languageController as lang">
+	<div ng-controller="menuController as c" ng-include="'html/menu.html'"></div>
+	<div class="contentBox" id="newEventBox" ng-include="'html/newEventBox.html'" ng-controller="newEventController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="newPilotBox" ng-include="'html/newPilotBox.html'" ng-controller="newPilotController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="editPilotBox" ng-include="'html/editPilotBox.html'" ng-controller="editPilotController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="pilotsListBox" ng-include="'html/pilotsListBox.html'" ng-controller="pilotListController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="languageBox" ng-include="'html/languageBox.html'" ng-show="lang.isVisible()"></div>
+	<div class="contentBox" id="newClubBox" ng-include="'html/newClubBox.html'" ng-controller="newClubController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="editClubBox" ng-include="'html/editClubBox.html'" ng-controller="editClubController as c" ng-show="c.isVisible()"></div>
+	<div class="contentBox" id="clubsListBox" ng-include="'html/clubsListBox.html'" ng-controller="clubListController as c" ng-show="c.isVisible()"></div>
+	<div id="notificationContainer" ng-include="'html/notifications.html'" ng-controller="notificationController as c" ></div>
+</body>
+</html>

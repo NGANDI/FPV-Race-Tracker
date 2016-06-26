@@ -1,0 +1,256 @@
+@font-face {
+	font-family: "RacingSansOne-Regular";
+	src: url('../fonts/RacingSansOne-Regular.ttf');
+}
+
+body {
+	font-family: "RacingSansOne-Regular", Helvetica Neue, Helvetica, Arial,
+		sans-serif;
+	margin: 0px !important;
+	background-color: #00ff00;
+}
+
+.removed {
+	display: none !important;
+}
+
+#liveSingleResultContainer {
+	position: absolute;
+	left: 50px;
+	bottom: 20px;
+	height: 70px;
+	color: white;
+}
+
+#liveSingleResultContainer .pos {
+	position: relative;
+	float: left;
+	width: 50px;
+	height: 70px;
+}
+
+#liveSingleResultContainer .pos div {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: rgb(248, 235, 83);
+}
+
+#liveSingleResultContainer .name {
+	position: relative;
+	float: left;
+	height: 50px;
+	margin-top: 20px;
+}
+
+#liveSingleResultContainer .name div {
+	background-color: black;
+	white-space: nowrap;
+	display: table;
+	padding: 0px 5px;
+	min-width: 70px;
+}
+
+#liveSingleResultContainer .currentLap div {
+	background-color: rgb(163, 41, 35);
+}
+
+#liveSingleResultContainer .bestLap div {
+	background-color: rgb(43, 99, 176);
+}
+
+#liveSingleResultContainer .name span, #liveSingleResultContainer .currentLap span,
+	#liveSingleResultContainer .bestLap span {
+	padding-left: 5px;
+}
+
+#liveSingleResultContainer .pos, #liveSingleResultContainer .name span, #liveSingleResultContainer .currentLap span,
+	#liveSingleResultContainer .bestLap span {
+	color: black;
+}
+
+#liveSingleResultContainer .name div, #liveSingleResultContainer .currentLap div,
+	#liveSingleResultContainer .bestLap div {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 5px;
+}
+
+#liveSingleResultContainer .currentLap {
+	position: relative;
+	float: left;
+	width: 100px;
+	height: 50px;
+	margin-top: 20px;
+}
+
+#liveSingleResultContainer .bestLap {
+	position: relative;
+	float: left;
+	width: 100px;
+	height: 50px;
+	margin-top: 20px;
+}
+
+#liveResultContainer {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 300px;
+	height: calc(100% - 20px);
+}
+
+.row0 span {
+	position: absolute;
+	bottom: 5px;
+}
+
+.row0 div {
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: black !important;
+	text-align: initial !important;
+}
+
+.resultCol {
+	position: absolute;
+	height: 30px;
+	color: white;
+	line-height: 30px;
+}
+
+.resultCol.col1 {
+	width: 30px;
+	margin-left: 0px;
+	background-color: rgb(248, 235, 83);
+	color: black !important;
+	text-align: center;
+}
+
+.resultCol.col2 {
+	width: 140px;
+	margin-left: 30px;
+	background-color: black;
+	padding-left: 5px;
+	overflow: hidden;
+}
+
+.resultCol.col3 {
+	width: 100px;
+	margin-left: 170px;
+	background-color: rgb(163, 41, 35);
+	padding-left: 5px;
+}
+
+.resultCol.col4 {
+	width: 30px;
+	margin-left: 270px;
+	background-color: rgb(43, 99, 176);
+	text-align: center;
+}
+
+.resultRow {
+	width: 300px;
+	height: 30px;
+	position: absolute;
+	margin-top: 0px;
+	white-space: nowrap;
+}
+
+.resultRow.row0 {
+	margin-top: 0px;
+}
+
+.resultRow.row1 {
+	margin-top: 20px;
+}
+
+.resultRow.row2 {
+	margin-top: 52px;
+}
+
+.resultRow.row3 {
+	margin-top: 84px;
+}
+
+.resultRow.row4 {
+	margin-top: 116px;
+}
+
+.resultRow.row5 {
+	margin-top: 148px;
+}
+
+.resultRow.row6 {
+	margin-top: 180px;
+}
+
+.resultRow.row7 {
+	margin-top: 212px;
+}
+
+.resultRow.row8 {
+	margin-top: 244px;
+}
+
+.resultRow.row9 {
+	margin-top: 276px;
+}
+
+.resultRow.row10 {
+	margin-top: 308px;
+}
+
+.resultRow.row11 {
+	margin-top: 350px;
+}
+
+@media only screen and (min-width:1600px) {
+	body {
+		font-size: 13pt;
+	}
+	.font-large {
+		font-size: 16pt;
+	}
+	.font-small {
+		font-size: 9pt;
+	}
+}
+
+@media only screen and (max-width:1600px) {
+	body {
+		font-size: 12pt;
+	}
+	.font-large {
+		font-size: 15pt;
+	}
+	.font-small {
+		font-size: 9pt;
+	}
+}
+
+@media only screen and (max-width:1200px) {
+	body {
+		font-size: 11pt;
+	}
+	.font-large {
+		font-size: 14pt;
+	}
+	.font-small {
+		font-size: 8pt;
+	}
+}
+
+@media only screen and (max-width:1000px) {
+	body {
+		font-size: 10pt;
+	}
+	.font-large {
+		font-size: 13pt;
+	}
+	.font-small {
+		font-size: 8pt;
+	}
+}

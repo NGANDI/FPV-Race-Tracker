@@ -1,0 +1,16 @@
+#raceBand {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 40px);
+	margin-top: 40px;
+}
+
+#raceBandConfigBox {
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+#raceBandList li {
+	margin: 5px 0px;
+	list-style-type: decimal;
+}

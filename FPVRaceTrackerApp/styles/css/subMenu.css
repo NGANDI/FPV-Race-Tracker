@@ -1,0 +1,28 @@
+/* line 3, ../scss/subMenu.scss */
+#subMenu {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 150px;
+  height: calc(100% - 90px);
+  background-color: #1F2126;
+}
+/* line 11, ../scss/subMenu.scss */
+#subMenu .selected {
+  background-color: #ff5300 !important;
+}
+/* line 15, ../scss/subMenu.scss */
+#subMenu .button {
+  background-color: #4F555E;
+  height: 20px;
+  margin-top: 10px;
+  width: calc(100% - 5px);
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  line-height: 20px;
+}
+/* line 25, ../scss/subMenu.scss */
+#subMenu .button span {
+  position: relative;
+}

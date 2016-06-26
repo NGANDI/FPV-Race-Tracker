@@ -1,0 +1,29 @@
+<html>
+<head>
+<script>
+	function fpvracetrackerForward(url) {
+		console.log("url: " + url);
+		window.open(url, '_blank');
+	}
+
+	document.addEventListener("DOMContentLoaded", function() {
+		var key = "";
+		var showPilots = false;
+		window.location.search.replace('?', '').split("&").forEach(function(param) {
+			var param = param.split("=");
+			if (param && param.length == 2) {
+				if (param[0] == "key") {
+					key = param[1];
+				}
+			}
+		});
+		var site = "http://localhost:8080/web/calendar.html?key=" + key;
+		//var site = "https://cloud.fpvracetracker.com/calendar.html?key=" + key;
+		document.getElementById('calendarIFrame').src = site;
+	}, false);
+</script>
+</head>
+<body style="background-color: darkslategrey;">
+	<iframe id="calendarIFrame" style="position: absolute; top: 10px; left: 15%; width: 70%; height: calc(100% - 20px);"></iframe>
+</body>
+</html>

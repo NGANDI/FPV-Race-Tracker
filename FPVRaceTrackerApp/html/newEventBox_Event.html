@@ -1,0 +1,51 @@
+<div class="headerLine">
+	<span>{{lang.language.json.event.createEvent}}</span>
+</div>
+<form name="eventForm" ng-class="{submitted:c.submitted}">
+	<table class="basicTable">
+		<tr>
+			<td>{{lang.language.json.event.name}}</td>
+			<td><input name="name" required ng-minlength="1" ng-maxlength="100" placeholder="EVENT NAME*" type="text" ng-model="c.event.name"> <span class="inputMessage"
+				ng-show="c.submitted && !eventForm.name.$valid">{{lang.language.json.event.nameError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.dateFrom}}</td>
+			<td><input name="dateFrom" type="date" ng-model="c.event.dateFrom"><span class="inputMessage"
+				ng-show="c.submitted && !eventForm.dateFrom.$valid">{{lang.language.json.event.dateFromError}}</span>
+				</td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.dateTo}}</td>
+			<td><input name="dateTo" type="date" ng-model="c.event.dateTo"><span class="inputMessage"
+				ng-show="c.submitted && !eventForm.dateTo.$valid">{{lang.language.json.event.dateToError}}</span>
+				</td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.basic.country}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.country" ng-options="country for country in c.COUNTRIES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.address}}</td>
+			<td><input name="address" ng-maxlength="200" placeholder="EVENT ADDRESS" type="text" ng-model="c.event.address"> <span class="inputMessage"
+				ng-show="c.submitted && !eventForm.address.$valid">{{lang.language.json.event.addressError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.contactEmail}}</td>
+			<td><input name="contactEmail" ng-maxlength="100" placeholder="EMAIL" type="email" ng-model="c.event.contactEmail"> <span class="inputMessage"
+				ng-show="c.submitted && !eventForm.contactEmail.$valid">{{lang.language.json.event.contactEmailError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.automaticMode}}</td>
+			<td>automatic race checkbox here</td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.classes}}</td>
+			<td>class list goes here</td>
+		</tr>
+	</table>
+</form>
+<div class="basicButton" ng-click="c.save(eventForm.$valid, c.event)">{{lang.language.json.basic.save}}</div>
+<div class="basicButton" ng-click="c.reset()">{{lang.language.json.basic.reset}}</div>

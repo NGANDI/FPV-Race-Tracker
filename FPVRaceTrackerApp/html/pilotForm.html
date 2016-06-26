@@ -1,0 +1,64 @@
+
+<table class="basicTable">
+	<tr>
+		<td>{{lang.language.json.pilot.firstName}}</td>
+		<td><input name="firstName" required ng-minlength="1"
+			ng-maxlength="30" placeholder="FIRST NAME*" type="text"
+			ng-model="c.pilot.firstName"> <span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.firstName.$valid">{{lang.language.json.pilot.firstNameError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.pilot.lastName}}</td>
+		<td><input name="lastName" required ng-minlength="1"
+			ng-maxlength="30" placeholder="LAST NAME*" type="text"
+			ng-model="c.pilot.lastName"><span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.lastName.$valid">{{lang.language.json.pilot.lastNameError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.pilot.alias}}</td>
+		<td><input name="alias" ng-maxlength="30" placeholder="ALIAS"
+			type="text" ng-model="c.pilot.alias"><span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.alias.$valid">{{lang.language.json.pilot.aliasError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.basic.country}}</td>
+		<td class="select"><div class="customSelect">
+				<select required ng-model="c.pilot.country"
+					ng-options="country for country in c.COUNTRIES">
+				</select>
+			</div></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.basic.club}}</td>
+		<td class="select"><div class="customSelect">
+				<select ng-model="c.pilot.clubIdx"
+					ng-options="club.idx as club.name for club in c.clubs">
+				</select>
+			</div></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.pilot.email}}</td>
+		<td><input name="email" ng-maxlength="100" placeholder="EMAIL"
+			type="email" ng-model="c.pilot.email"><span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.email.$valid">{{lang.language.json.pilot.emailError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.pilot.registrationNumber}}</td>
+		<td><input name="registrationNumber" ng-maxlength="30"
+			placeholder="REGISTRATION NUMBER" type="text"
+			ng-model="c.pilot.registrationNumber"><span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.registrationNumber.$valid">{{lang.language.json.pilot.registrationNumberError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.pilot.transponder}}</td>
+		<td class="selectAndInput"><div class="customSelect">
+				<select ng-model="c.pilot.transponder.vendorIdx"
+					ng-options="vendor.idx as vendor.name for vendor in c.vendorService.vendors">
+				</select>
+			</div> <input name="transponderId" ng-maxlength="30"
+			placeholder="TRANSPONDER ID" type="text"
+			ng-model="c.pilot.transponder.identifier"><span class="inputMessage"
+			ng-show="c.submitted && !pilotForm.transponderId.$valid">{{lang.language.json.pilot.transponderNumberError}}</span></td>
+	</tr>
+</table>
+<div class="basicButton" ng-click="c.save(pilotForm.$valid, c.pilot)">{{lang.language.json.basic.save}}</div>

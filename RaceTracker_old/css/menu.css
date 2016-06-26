@@ -1,0 +1,119 @@
+#menu, #subMenu {
+	position: absolute;
+	width: 80%;
+	margin-left: 10%;
+	height: 55px;
+	z-index: 99;
+	top: -5px;
+}
+
+#menu:after {
+	content: '';
+	width: 109.3%;
+	left: -5%;
+	background: rgba(128, 128, 128, 0.13);
+	top: 60px;
+	position: absolute;
+	height: 2px;
+}
+
+#menu .menuElement:hover, #subMenu .menuElement:hover {
+	margin-top: 3px;
+}
+
+#menu .menuElement:active, #subMenu .menuElement:active {
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #979599 100%);
+	margin-top: 3px;
+}
+
+#menu .menuElement, #subMenu .menuElement {
+	position: relative;
+	float: left;
+	height: 38px;
+	width: 19.5%;
+	margin-right: 1px;
+	line-height: 40px;
+	text-align: center;
+	color: rgba(43, 45, 45, 0.82);
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #CCCACF 100%);
+	box-shadow: 1px 1px 1px 0px rgba(45, 45, 45, 0.5), -1px 1px 1px 0px
+		rgba(45, 45, 45, 0.5);
+	color: rgba(43, 45, 45, 0.82);
+	cursor: pointer;
+}
+
+#subMenu:not(.visible) {
+	display: none;
+}
+#subMenu .menuElement:not(.visible) {
+	display: none;
+}
+
+#subMenu.raceSubMenu {
+	margin-top: 70px;
+  	width: 37% !important;
+  	margin-left: 6% !important;
+}
+#subMenu {
+	margin-top: 65px;
+	height: 35px;
+}
+
+#subMenu .menuElement {
+	height: 25px;
+	line-height: 27px;
+}
+
+#subMenu.size2 {
+	width: 20%;
+	margin-left: 40%;
+}
+
+#subMenu.size2 .menuElement {
+	width: 49.5%;
+}
+
+#subMenu.size3 {
+	width: 40%;
+	margin-left: 30%;
+}
+
+#subMenu.size3 .menuElement {
+	width: 33%;
+}
+
+#subMenu.size4 {
+	width: 60%;
+	margin-left: 20%;
+}
+
+#subMenu.size4 .menuElement {
+	width: 24.5%;
+}
+
+#subMenu.size5 {
+	width: 80%;
+	margin-left: 10%;
+}
+
+#subMenu.size5 .menuElement {
+	width: 19.5%;
+}
+
+#subMenu.size6 {
+	width: 90%;
+	margin-left: 5%;
+}
+
+#subMenu.size6 .menuElement {
+	width: 16.5%;
+}
+
+#subMenu.size7 {
+	width: 90%;
+	margin-left: 5%;
+}
+
+#subMenu.size7 .menuElement {
+	width: 14.1%;
+}

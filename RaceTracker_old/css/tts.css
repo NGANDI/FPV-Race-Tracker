@@ -1,0 +1,11 @@
+#tts {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 40px);
+	margin-top: 40px;
+}
+
+#ttsConfigBox {
+	margin-top: 50px;
+	margin-left: 50px;
+}

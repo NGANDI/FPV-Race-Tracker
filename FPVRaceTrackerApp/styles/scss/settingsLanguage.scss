@@ -1,0 +1,31 @@
+@import 'variables';
+
+#languageBox {
+	.languageEditTable {
+    	width: 500px;
+    	
+    	.keyrow td {
+    		width: 100%;
+			border-bottom: 1px solid $header-line-border;
+    		font-weight: bold;
+    	}
+    	
+    	.inputrow {
+    		tr {
+    			width: 100%;
+    		}
+    		td.name {
+    			width: 40%;
+    		}
+    		td.value {
+    			width: 60%;
+    			input {
+			    	width: 100%;
+				    border: none;
+				    border-bottom: 1px solid #DDDDDE;
+				    padding: 2px 0;
+   				}
+    		}
+    	}
+	}
+}

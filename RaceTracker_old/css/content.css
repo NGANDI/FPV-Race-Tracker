@@ -1,0 +1,15 @@
+#content {
+	position: absolute;
+	width: calc(100% - 20px);
+	height: calc(100% - 65px);
+	left: 10px;
+	top: 65px;
+	background-image: url("../img/logo_big.png");
+	background-size: 45%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.contentElement:not(.visible) {
+	display: none;
+}

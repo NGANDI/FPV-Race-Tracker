@@ -1,0 +1,29 @@
+/* line 4, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable {
+  width: 500px;
+}
+/* line 7, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable .keyrow td {
+  width: 100%;
+  border-bottom: 1px solid #DDDDDE;
+  font-weight: bold;
+}
+/* line 14, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable .inputrow tr {
+  width: 100%;
+}
+/* line 17, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable .inputrow td.name {
+  width: 40%;
+}
+/* line 20, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable .inputrow td.value {
+  width: 60%;
+}
+/* line 22, ../scss/settingsLanguage.scss */
+#languageBox .languageEditTable .inputrow td.value input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #DDDDDE;
+  padding: 2px 0;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="appScreen2">
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<script type="text/javascript" src="script/js/lib/angular.min.js"></script>
+<script type="text/javascript"
+	src="script/js/lib/angular-indexed-db.min.js"></script>
+<script type="text/javascript" src="script/js/main.js"></script>
+<link rel="stylesheet" media="screen" href="css/screen2Main.css">
+<link rel="stylesheet" media="screen" href="css/screen2Results.css">
+
+</head>
+<body ng-controller="Screen2Controller">
+	<div id="resultScreen-content">
+		<div class="resultSet"
+			ng-repeat="result in heatResults | orderBy: '-heatTimestamp'">
+			<span class="left">{{result.raceFormat}}:&nbsp;{{result.raceClass}}</span>
+			<span class="right">
+				{{result.roundDescription}}&nbsp;ROUND:&nbsp;{{result.roundNumber}}</span>
+			<p class="heatHeader">HEAT:&nbsp;{{result.heatNumber}}</p>
+			<table class="raceResultStatisticsPilots">
+				<thead>
+					<tr class="font-small">
+						<td><span>RANK</span></td>
+						<td><span>PILOT</span></td>
+						<td><span>LAPS</span></td>
+						<td><span>TOTAL</span></td>
+						<td><span>AVERAGE</span></td>
+						<td><span>BEST</span></td>
+						<td><span>LAST</span></td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-class-odd="'oddRow'"
+						ng-repeat="entry in result.raceResultEntries | orderBy: '+rank'">
+						<td><span>{{entry.rank}}</span></td>
+						<td><span>{{"[" + entry.pilotNumber + "]
+								"+entry.pilotName}}</span></td>
+						<td><span>{{entry.amountOfLaps}}</span></td>
+						<td><span>{{entry.totalTime*1000 | date:'mm:ss:sss'}}</span></td>
+						<td><span>{{entry.averageRoundTime*1000 |
+								date:'mm:ss:sss'}}</span></td>
+						<td><span>{{entry.bestRoundTime*1000 |
+								date:'mm:ss:sss'}}</span></td>
+						<td><span>{{entry.lastRoundTime*1000 |
+								date:'mm:ss:sss'}}</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div id="timetableScreen-content">
+		<div class="resultSet"
+			ng-repeat="timetable in upcomingHeats | orderBy: '+heatTimestamp'">
+			<span class="left">{{timetable.raceFormat}}:&nbsp;{{timetable.raceClass}}<br />{{timetable.heatTimestamp
+				| date:'medium'}}
+			</span> <span class="right">
+				ROUND:&nbsp;{{timetable.roundNumber}}&nbsp;{{timetable.roundDescription}}</span>
+			<p class="heatHeader">HEAT:&nbsp;{{timetable.heatNumber}}</p>
+			<table class="timetableTable">
+				<thead>
+					<tr class="font-small">
+						<td><span>PILOT</span></td>
+						<td><span>RACE BAND</span></td>
+						<td><span>TRANSPONDER ID</span></td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-class-odd="'oddRow'"
+						ng-repeat="pilot in timetable.pilots | orderBy: '+raceNumber'">
+						<td><span>[{{pilot.pilotNumber}}]&nbsp;{{pilot.firstName+'
+								'+pilot.lastName}}</span></td>
+						<td><span>{{pilot.assignedRaceBand.value}}</span></td>
+						<td><span>{{pilot.deviceId}}</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+

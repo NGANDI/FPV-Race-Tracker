@@ -1,0 +1,7 @@
+<div ng-click="c.remove(notification)" ng-class="'notification n'+notification.type+' '+(notification.fade ? 'fade' : '')" ng-repeat="notification in c.notificationService.notifications | orderBy: 'created'">
+  <span class="type" ng-show="notification.type == 1">{{lang.language.json.notification.success}}</span>
+  <span class="type" ng-show="notification.type == 2">{{lang.language.json.notification.info}}</span>
+  <span class="type" ng-show="notification.type == 3">{{lang.language.json.notification.warn}}</span>
+  <span class="type" ng-show="notification.type == 4">{{lang.language.json.notification.error}}</span>
+  <span>&nbsp;&nbsp;&nbsp;{{notification.text}}</span>
+</div>

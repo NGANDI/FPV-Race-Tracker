@@ -1,0 +1,35 @@
+#connectionState {
+	position: fixed;
+  	right: 0px;
+  	top: 0px;
+  	padding: 5px 10px;
+	height: 25px;
+	font-weight: bold;
+	//border-bottom: 1px solid black;
+	//border-left: 1px solid black;
+	//or??? box-shadow: 1px 0px 1px black;
+}
+
+#connectionState.online {
+	color: green;
+}
+#connectionState.online img:nth-of-type(2), #connectionState.offline img:nth-of-type(1) {
+    display: none;
+}
+#connectionState.offline {
+	color: red;
+}
+
+#connectionState img {
+	position: relative;
+  	float: right;
+	height: 25px;
+}
+
+#connectionState span {
+	position: relative;
+  	float: left;
+	font-size: 14px;
+	line-height: 25px;
+	margin-right: 10px;
+}

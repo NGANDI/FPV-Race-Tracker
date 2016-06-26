@@ -1,0 +1,82 @@
+@import 'variables';
+
+#mainMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 90px;
+	
+	.buttons {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 70px;
+		background-color: $background_darkgrey;
+		
+		.selected {
+			background-color: $color_greyButton_selected !important;
+		}
+		
+		.logoWithText {
+			position: relative;
+			float: left;
+			height: 50px;
+			top: 10px;
+			left: 10px;
+			margin-right: 30px;
+		}
+		
+		.button {
+			background-color: $color_greyButton;
+			height: 60px;
+			color: white;
+			text-align: center;
+			cursor: pointer;
+			
+			span {
+				position: relative;
+				top: 25px;
+				word-break: break-all;
+			}
+		}
+		
+		.button.right {
+			float: right;
+			width: 65px;
+    		margin-right: 20px;
+    		
+			span {
+   				top: 30px;
+    		}
+		}
+		
+		.button.left {
+			width: 75px;
+   			margin-left: 20px;
+			float: left;
+		}
+	}
+	
+	.info {
+		position: absolute;
+		top: 70px;
+		left: 0;
+		width: 100%;
+		height: 19px;
+		background-color: $background_lightgrey;
+		color: #A2A2A3;
+    	border-top: 1px solid rgba(162, 162, 163, 0.16);
+		line-height: 19px;
+		
+		.date {
+			float: left;
+			margin-left: 20px;
+		}
+		.version {
+			float: right;
+			margin-right: 20px;
+		}
+	}
+}

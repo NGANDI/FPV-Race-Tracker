@@ -1,0 +1,15 @@
+{
+  	"name": "FPV Race Tracker",
+  	"description": "The FPV Race Tracker is a timing & event solution for the FPV Multirotor Racing Sport. Made from Pilots for Pilots.",
+  	"version": "1.0.0.0",
+  	"minimum_chrome_version": "42.0.2311",
+  	"manifest_version": 2,
+	"permissions": ["unlimitedStorage", "serial", "system.display", "tts", "http://localhost/", 
+		"http://cloud.fpvracetracker.com/", "https://cloud.fpvracetracker.com/"],
+  	"app": {
+    		"background": {
+      			"scripts": ["appconfig.js"]
+    		}
+  	},
+  	"icons": { "256": "img/logo/logo256.png",  "128": "img/logo/logo128.png" }
+}

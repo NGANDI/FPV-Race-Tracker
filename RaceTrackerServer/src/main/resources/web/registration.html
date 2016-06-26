@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FPV Race Tracker</title>
+<meta charset="utf-8">
+<link rel="stylesheet" media="screen" href="styles/registration/main.css">
+<script type="text/javascript" src="script/js/registration/init.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+	<div id="registerForm">
+		<a href="https://www.facebook.com/fpvracetracker" target="_blank"><img src="img/logo128_2.png" alt="FPV Race Tracker"> </a>
+		<p class="header">REGISTER PILOT</p>
+		<input id="input_firstName" placeholder="FIRST NAME*" type="text" /> <input id="input_lastName" placeholder="LAST NAME*" type="text" /> <input id="input_alias" placeholder="ALIAS" type="text" />
+		<input id="input_phone" placeholder="PHONE" type="text" /> <select id="select_country">
+		</select> <input id="input_email" placeholder="CONFIRMATION E-MAIL*" type="text" /> <input id="input_club" placeholder="CLUB" type="text" /> <input id="input_transponderId" placeholder="TRANSPONDER ID" type="text" />
+		<br />
+		<p class="header">CLASSES</p>
+		<div id="classContainer"></div>
+		<br />
+		<div id="captcha" data-callback="captchaSuccess" data-expired-callback="captchaExpired" class="g-recaptcha" data-sitekey="6LfUNRATAAAAAP7QM8917ypgO-Sp9q0De73RQnVw"></div>
+		<br />
+		<div id="registerButton">REGISTER</div>
+	</div>
+	<div id="registerSuccess" class="hidden">
+		<h2>
+			<span>Success!</span>
+		</h2>
+		<span>Shortly you will receive an email confirming your registration!</span>
+	</div>
+	<div id="registerNotPossible" class="hidden">
+		<span>We are sorry, but a registration is not possible!</span><br /> <span>Please contact the provider of this website or <a target="_blank" href="mailto:info@fpvracetracker.com">info@fpvracetracker.com</a>!
+		</span>
+	</div>
+</body>
+</html>
+

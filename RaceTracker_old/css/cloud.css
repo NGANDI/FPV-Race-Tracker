@@ -1,0 +1,35 @@
+#cloud {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 40px);
+	margin-top: 40px;
+}
+
+#cloud input {
+	width: 400px;
+	text-align: center;
+}
+
+#cloud .red {
+	color: red;
+}
+
+#cloud #restoreContainer {
+	position: absolute;
+	bottom: 25px;
+	width: 100%;
+}
+
+#cloud #blockScreen {
+	position: absolute;
+    top: -110px;
+    width: 100%;
+    height: calc(100% + 110px);
+	background-color: white;
+	z-index: 1000;
+	text-align: center;
+	background-image: url("../img/logo_big.png");
+	background-size: 75%;
+	background-position: center;
+	background-repeat: no-repeat;
+}

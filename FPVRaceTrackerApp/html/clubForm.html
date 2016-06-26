@@ -1,0 +1,15 @@
+<table class="basicTable">
+	<tr>
+		<td>{{lang.language.json.basic.name}}</td>
+		<td><input name="name" required placeholder="NAME*" type="text" ng-model="c.club.name"> <span class="inputMessage"
+			ng-show="c.submitted && !clubForm.name.$valid">{{lang.language.json.club.nameError}}</span></td>
+	</tr>
+	<tr>
+		<td>{{lang.language.json.basic.country}}</td>
+		<td class="select"><div class="customSelect">
+				<select ng-model="c.club.country" ng-options="country for country in c.COUNTRIES">
+				</select>
+			</div></td>
+	</tr>
+</table>
+<div class="basicButton" ng-click="c.save(clubForm.$valid, c.club)">{{lang.language.json.basic.save}}</div>

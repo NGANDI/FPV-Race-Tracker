@@ -1,0 +1,321 @@
+#races {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#startHeatCountdown {
+	position: absolute;
+	right: 5px;
+	visibility: hidden;
+	transition: right 0.4s;
+}
+
+#startHeatCountdown.show {
+	visibility: initial !important;
+	right: 20px !important;
+}
+
+.noMarginBottom {
+	margin-bottom: 0 !important;
+}
+
+.noPadding {
+	padding: 0 !important;
+}
+
+#configureRace-container.mini {
+	width: 250px;
+}
+
+#configureRace-container {
+	position: absolute;
+	width: 350px;
+	height: 100%;
+	border-right: 1px solid whitesmoke;
+}
+
+#configureRace-container.mini table {
+	width: 220px;
+}
+
+#configureRace-container table {
+	width: 320px;
+	margin-left: 15px;
+}
+
+.right {
+	float: right !important;
+}
+
+#configureRace-container table span {
+	float: right;
+	margin-right: 18px;
+	color: rgb(76, 76, 76);
+	text-align: right;
+}
+
+#configureRace-container.mini .button {
+	width: 220px;
+}
+
+#configureRace-container .button {
+	margin-top: 15px;
+	width: 320px;
+	margin-left: 15px;
+}
+
+#configureRace-container .floatLeft {
+	float: left !important;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+#configureRace-container .countdownElement {
+	text-align: center;
+}
+
+#configureRace-container .countdownElement span {
+	float: initial;
+}
+
+#configureRace-container .locked .lockable {
+	pointer-events: none;
+	opacity: 0.8;
+}
+
+#configureRace-container .col1 {
+	width: 150px;
+}
+
+#configureRace-container .col2 {
+	width: 170px;
+}
+
+#configureRace-container table select {
+	width: 100%;
+	padding: 2px 10px;
+	font-size: inherit;
+}
+
+#configureRace-container table input {
+	width: 200px;
+	height: 16px;
+	padding: 2px 10px;
+	font-size: inherit;
+	border: 1px solid rgba(150, 150, 150, 0.53) !important;
+}
+
+#configureRace-container table thead td {
+	padding-bottom: 10px;
+}
+
+#races #addPilotsList {
+	position: absolute;
+	left: 365px;
+	width: calc(100% - 365px);
+	overflow-y: auto;
+	height: 97%;
+}
+
+#races #addPilotsList .menuIcon {
+	left: calc(85% - 17px);
+	position: absolute;
+	z-index: 1;
+}
+
+#races #addPilotsList .datepicker {
+	left: calc(15% + 77px);
+	width: 240px;
+	position: absolute;
+	border: none;
+}
+
+#races #addPilotsList .menuIcon .button {
+	width: 100px;
+	margin-top: -1px;
+	margin-left: -42px;
+	box-shadow: -1px 1px 2px white, 1px 1px 2px white;
+	z-index: 3;
+}
+
+#races #addPilotsList .menuIcon .button span {
+	position: relative !important;
+	left: initial !important;
+	margin: initial !important;
+}
+
+#races #addPilotsList .menuElements {
+	left: calc(85% - 150px);
+	background-color: white;
+	position: absolute;
+	width: 150px;
+}
+
+#races #addPilotsList .menuElement {
+	float: left;
+	width: 100%;
+}
+
+#races #addPilotsList .menuIcon .first {
+	margin-top: 20px !important;
+}
+
+#races #addPilotsList table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+#races #availablePilots tbody tr {
+	background-color: rgba(255, 0, 0, 0.29) !important;
+}
+
+#races #addPilotsList #pilotFilter {
+	width: 35%;
+}
+
+#races #addPilotsList table thead td {
+	padding-bottom: 10px;
+}
+
+#races #addPilotsList table span {
+	margin-left: 5px;
+}
+
+#races #addPilotsList table table tbody span {
+	color: rgb(16, 16, 16);
+}
+
+#races #addPilotsList table td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#races #addPilotsList table tbody td {
+	
+}
+
+#races #addPilotsList .heatHeader span {
+	position: absolute;
+	left: 15%;
+}
+
+#races #addPilotsList .heatHeader {
+	padding-bottom: 25px !important;
+}
+
+#editResultDialogContainer, #movePilotDialogContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#races #editResultDialogContainer #editResultDialog {
+	width: 70% !important;
+	margin-left: 15% !important;
+}
+
+#races #editResultDialogContainer #editResultDialog table {
+	width: 100% !important;
+}
+
+#races #editResultDialogContainer #editResultDialog input {
+	width: 90% !important;
+}
+
+#races #movePilotDialogContainer #movePilotDialog, #races #editResultDialogContainer #editResultDialog
+	{
+	position: relative;
+	top: 10%;
+	max-height: 75%;
+	width: 40%;
+	margin-left: 30%;
+	border: 1px solid black;
+	overflow: auto;
+	padding: 1.5vw;
+	box-shadow: inset 0 0 0 1000px rgba(204, 202, 207, 0.05);
+	background-color: rgba(255, 255, 255, 1);
+}
+
+#races #movePilotDialogContainer #movePilotDialog p, #races #editResultDialogContainer #editResultDialog p
+	{
+	text-align: center;
+}
+
+#races #movePilotDialogContainer #movePilotDialog .button, #races #editResultDialogContainer #editResultDialog .button
+	{
+	margin-bottom: 1.5vw;
+}
+
+#races #addPilotsList.qualifying {
+	border-left: 1px solid rgba(190, 189, 189, 0.81);
+	border-right: 1px solid rgba(190, 189, 189, 0.81);
+	border-bottom: 1px solid rgba(190, 189, 189, 0.81);
+}
+
+.tabHeader.borderRight {
+	width: calc(50% - 1px) !important;
+	border-right: 1px solid rgba(190, 189, 189, 0.81);
+}
+
+.tabHeader.selected {
+	background-color: rgba(142, 140, 140, 0.42);
+}
+
+#races .tabHeader {
+	width: 50%;
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	color: rgba(43, 45, 45, 0.82);
+	font-size: 10pt;
+	border-top: 1px solid rgba(190, 189, 189, 0.81);
+	border-bottom: 1px solid rgba(190, 189, 189, 0.81);
+	color: rgba(43, 45, 45, 0.82);
+	cursor: pointer;
+}
+
+#raceResult {
+	position: absolute;
+	left: 265px;
+	width: calc(100% - 265px);
+	overflow-y: auto;
+	height: 100%;
+}
+
+#raceResult table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#raceResult table thead td {
+	padding-bottom: 10px;
+}
+
+#raceResult table span {
+	margin-left: 5px;
+}
+
+#raceResult table table tbody span {
+	color: rgb(16, 16, 16);
+}
+
+#raceResult table td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.tableSeperator.rounds {
+	padding-top: 10px;
+}
+
+.tableSeperator.mini {
+	padding-top: 160px !important;
+}

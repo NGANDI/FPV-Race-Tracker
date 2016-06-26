@@ -1,0 +1,23 @@
+<div class="headerLine">
+	<span>{{lang.language.json.languageConfig.selectLanguage}}</span>
+</div>
+<div class="customSelect">
+	<select ng-model="lang.selectedLanguageName" ng-change="lang.languageSelected()" ng-options="language for language in lang.languages">
+	</select>
+</div>
+<div ng-show="lang.language.editable">
+	<div class="headerLine">
+		<span>{{lang.language.json.languageConfig.editLanguage}}</span>
+	</div>
+	<div ng-repeat="(key, val) in lang.language.json">
+		<table class="languageEditTable">
+			<tr class="keyrow">
+				<td colspan=2>{{key}}</td>
+			</tr>
+			<tr class="inputrow" ng-repeat="(key2, val2) in val">
+				<td class="name">{{key2}}</td>
+				<td class="value"><input type="text" ng-change="lang.change(key, key2, val2)" ng-model="val2"></td>
+			</tr>
+		</table>
+	</div>
+</div>

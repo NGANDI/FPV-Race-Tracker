@@ -1,0 +1,29 @@
+@import 'variables';
+
+#subMenu {
+	position: absolute;
+	top: 90px;
+	left: 0;
+	width: 150px;
+	height: calc(100% - 90px);
+	background-color: $background_darkgrey;
+		
+	.selected {
+		background-color: $color_greyButton_selected !important;
+	}
+	
+	.button {
+		background-color: $color_greyButton;
+		height: 20px;
+		margin-top: 10px;
+		width: calc(100% - 5px);
+		color: white;
+		text-align: center;
+		cursor: pointer;
+		line-height: 20px;
+		
+		span {
+			position: relative;
+		}
+	}
+}

@@ -1,0 +1,63 @@
+<div id="mainMenu">
+	<div class="buttons">
+		<img class="logoWithText" src="/img/logo/logoWithText.png" />
+		<div class="button left" ng-click="c.selectEventsMenu()" ng-class="c.isEventsMenuSelected()">
+			<span>{{lang.language.json.menu.events}}</span>
+		</div>
+		<div class="button left" ng-click="c.selectRaceMenu()" ng-class="c.isRaceMenuSelected()">
+			<span>{{lang.language.json.menu.race}}</span>
+		</div>
+		<div class="button right" ng-click="c.selectAccountMenu()" ng-class="c.isAccountMenuSelected()">
+			<span>{{lang.language.json.menu.account}}</span>
+		</div>
+		<div class="button right" ng-click="c.selectSettingsMenu()" ng-class="c.isSettingsMenuSelected()">
+			<span>{{lang.language.json.menu.settings}}</span>
+		</div>
+		<div class="button right" ng-click="c.selectPilotsMenu()" ng-class="c.isPilotsMenuSelected()">
+			<span>{{lang.language.json.menu.pilots}}</span>
+		</div>
+		<div class="button right" ng-click="c.selectClubsMenu()" ng-class="c.isClubsMenuSelected()">
+			<span>{{lang.language.json.menu.clubs}}</span>
+		</div>
+	</div>
+	<div class="info">
+		<div class="date">
+			<span>{{c.now | date:'medium'}}</span>
+		</div>
+		<div class="version">
+			<span>{{lang.language.json.menu.version}}:&nbsp;</span><span>{{c.getVersion()}}</span>
+		</div>
+	</div>
+</div>
+<div id="subMenu">
+	<div class="button" ng-click="c.selectEvents_newEvent()" ng-show="c.isEventsMenuSelected()" ng-class="c.isEvents_newEventMenuSelected()">
+		<span>{{lang.language.json.subMenu.eventsNew}}</span>
+	</div>
+	<div class="button" ng-click="c.selectEvents_upcomingEvents()" ng-show="c.isEventsMenuSelected()" ng-class="c.isEvents_upcomingEventsMenuSelected()">
+		<span>{{lang.language.json.subMenu.eventsUpcoming}}</span>
+	</div>
+	<div class="button" ng-click="c.selectEvents_pastEvents()" ng-show="c.isEventsMenuSelected()" ng-class="c.isEvents_pastEventsMenuSelected()">
+		<span>{{lang.language.json.subMenu.eventsPast}}</span>
+	</div>
+	<div class="button" ng-click="c.selectPilots_newPilot()" ng-show="c.isPilotsMenuSelected()" ng-class="c.isPilots_newPilotMenuSelected()">
+		<span>{{lang.language.json.subMenu.pilotsNew}}</span>
+	</div>
+	<div class="button" ng-click="c.selectPilots_pilotsList()" ng-show="c.isPilotsMenuSelected()" ng-class="c.isPilots_pilotsListMenuSelected()">
+		<span>{{lang.language.json.subMenu.pilotsList}}</span>
+	</div>
+	<div class="button" ng-click="c.selectPilots_pilotsEdit()" ng-show="c.isEditPilotsMenuSelected()" ng-class="c.isPilots_editPilotMenuSelected()">
+		<span>{{lang.language.json.subMenu.pilotsEdit}}</span>
+	</div>
+	<div class="button" ng-click="c.selectPilots_pilotsList()" ng-show="c.isSettingsMenuSelected()" ng-class="c.isSettings_languageMenuSelected()">
+		<span>{{lang.language.json.subMenu.settingsLanguage}}</span>
+	</div>
+	<div class="button" ng-click="c.selectClubs_newClub()" ng-show="c.isClubsMenuSelected()" ng-class="c.isClubs_newClubMenuSelected()">
+		<span>{{lang.language.json.subMenu.clubsNew}}</span>
+	</div>
+	<div class="button" ng-click="c.selectClubs_clubsList()" ng-show="c.isClubsMenuSelected()" ng-class="c.isClubs_clubsListMenuSelected()">
+		<span>{{lang.language.json.subMenu.clubsList}}</span>
+	</div>
+	<div class="button" ng-click="c.selectClubs_clubsEdit()" ng-show="c.isEditClubsMenuSelected()" ng-class="c.isClubs_editClubMenuSelected()">
+		<span>{{lang.language.json.subMenu.clubsEdit}}</span>
+	</div>
+</div>

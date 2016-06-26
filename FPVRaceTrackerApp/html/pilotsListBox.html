@@ -1,0 +1,30 @@
+<div class="headerLine">
+	<span>{{lang.language.json.pilot.pilotList}}</span> <input
+		class="filter" placeholder="{{lang.language.json.basic.search}}"
+		type="text" ng-model="pilotFilter" />
+</div>
+<table class="basicTableList">
+	<thead>
+		<tr>
+			<td><span>{{lang.language.json.pilot.firstName}}</span></td>
+			<td><span>{{lang.language.json.pilot.lastName}}</span></td>
+			<td><span>{{lang.language.json.pilot.alias}}</span></td>
+			<td><span>{{lang.language.json.basic.country}}</span></td>
+			<td><span>{{lang.language.json.basic.club}}</span></td>
+			<td><span>{{lang.language.json.pilot.email}}</span></td>
+			<td><span>{{lang.language.json.pilot.registrationNumber}}</span></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-click="c.showEdit(pilot)" ng-class-odd="'oddRow'"
+			ng-repeat="pilot in c.pilots | filter: pilotFilter track by $index">
+			<td><span>{{pilot.firstName}}</span></td>
+			<td><span>{{pilot.lastName}}</span></td>
+			<td><span>{{pilot.alias}}</span></td>
+			<td><span>{{pilot.country}}</span></td>
+			<td><span>{{pilot.clubIdx ? c.getClub(pilot.clubIdx).name : ''}}</span></td>
+			<td><span>{{pilot.email}}</span></td>
+			<td><span>{{pilot.registrationNumber}}</span></td>
+		</tr>
+	</tbody>
+</table>

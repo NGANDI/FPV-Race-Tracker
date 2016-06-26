@@ -1,0 +1,16 @@
+#classes {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 40px);
+	margin-top: 40px;
+}
+
+#classConfigBox {
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+#classList li {
+	margin: 5px 0px;
+	list-style-type: decimal;
+}

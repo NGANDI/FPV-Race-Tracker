@@ -1,0 +1,72 @@
+#resultScreen-content {
+	position: absolute;
+	height: 100%;
+	width: 65%;
+	left: 0;
+	top: 0;
+	border-right: 1px solid whitesmoke;
+}
+
+#resultScreen-content .raceResultStatisticsPilots {
+	width: 90%;
+	margin-left: 5%;
+	border-collapse: collapse;
+}
+
+#resultScreen-content .resultSet {
+	width: 96%;
+	padding: 2%;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.13);
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+#resultScreen-content .heatHeader {
+	text-align: center;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.13);
+	width: 70%;
+	margin-left: 15%;
+	margin-top: 20px;
+}
+
+#resultScreen-content .oddRow {
+	background-color: rgba(142, 140, 140, 0.22)
+}
+
+#timetableScreen-content {
+	position: absolute;
+	height: 100%;
+	width: 33%;
+	left: 67%;
+	top: 0;
+}
+
+#timetableScreen-content .timetableTable {
+	width: 90%;
+	margin-left: 5%;
+	border-collapse: collapse;
+}
+
+#timetableScreen-content .resultSet {
+	width: 96%;
+	padding: 2%;
+	border-bottom: 1px solid rgba(128, 128, 128, 0.13);
+}
+
+#timetableScreen-content .heatHeader {
+	text-align: center;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.13);
+	width: 70%;
+	margin-left: 15%;
+	margin-top: 40px;
+}
+
+#timetableScreen-content .oddRow {
+	background-color: rgba(142, 140, 140, 0.22)
+}

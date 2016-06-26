@@ -1,0 +1,45 @@
+<div class="headerLine">
+	<span>TODO</span>
+</div>
+<form name="raceForm" ng-class="{submitted:c.submitted}">
+	<table class="basicTable">
+		<tr>
+			<td>{{lang.language.json.event.raceMode}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.config.raceMode" ng-options="mode for mode in c.RACE_MODES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.heatWinner}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.config.heatWinnerMode" ng-options="mode for mode in c.HEAT_WINNER_MODES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.raceWinner}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.config.raceWinnerMode" ng-options="mode for mode in c.RACE_WINNER_MODES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.teamWinner}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.config.teamWinnerMode" ng-options="mode for mode in c.TEAM_WINNER_MODES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.amountOfRounds}}</td>
+			<td><input name="name" required ng-minlength="1" ng-maxlength="4" placeholder="AMOUNT OF ROUNDS*" type="number" ng-model="c.event.config.amountOfRounds">
+			 <span class="inputMessage" ng-show="c.submitted && !raceForm.name.$valid">TODO{{lang.language.json.event.amountOfRoundsError}}</span></td>
+		</tr>
+		<tr>
+			<td>todo: points if selected</td>
+		</tr>
+	</table>
+</form>
+<div class="basicButton" ng-click="c.save(raceFormForm.$valid, c.event)">{{lang.language.json.basic.save}}</div>
+<div class="basicButton" ng-click="c.reset()">{{lang.language.json.basic.reset}}</div>

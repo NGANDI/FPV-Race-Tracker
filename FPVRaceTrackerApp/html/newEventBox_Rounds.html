@@ -1,0 +1,57 @@
+<div class="headerLine">
+	<span>TODO</span>
+</div>
+<form name="roundsForm" ng-class="{submitted:c.submitted}">
+	<table class="basicTable">
+		<tr>
+			<td>{{lang.language.json.event.amountOfPilots}}</td>
+			<td><input name="amountOfPilots" required ng-minlength="1" ng-maxlength="9999" placeholder="AMOUNT OF PILOTS*" type="number" ng-model="c.event.roundConfig.amountOfPilots"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.amountOfPilots.$valid">TODO{{lang.language.json.event.amountOfPilotsError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.amountOfHeats}}</td>
+			<td><input name="amountOfHeats" required ng-minlength="1" ng-maxlength="9999" placeholder="AMOUNT OF HEATS*" type="number" ng-model="c.event.roundConfig.amountOfHeats"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.amountOfHeats.$valid">TODO{{lang.language.json.event.amountOfHeatsError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.roundMode}}</td>
+			<td class="select"><div class="customSelect">
+					<select required ng-model="c.event.config.roundMode" ng-options="mode for mode in c.ROUND_MODES">
+					</select>
+				</div></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.timePerHeat}}</td>
+			<td><input name="timePerHeat" required ng-minlength="1" ng-maxlength="9999" placeholder="TIME PER HEAT*" type="number" ng-model="c.event.roundConfig.timePerHeat"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.timePerHeat.$valid">TODO{{lang.language.json.event.timePerHeatError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.overtime}}</td>
+			<td><input name="overtime" required ng-minlength="1" ng-maxlength="9999" placeholder="OVERTIME PILOTS*" type="number" ng-model="c.event.roundConfig.overtime"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.overtime.$valid">TODO{{lang.language.json.event.overtimeError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.individualStart}}</td>
+			<td>TODO: checkbox <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.name.$valid">TODO{{lang.language.json.event.individualStartError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.blockingTime}}</td>
+			<td><input name="blockingTime" required ng-minlength="1" ng-maxlength="9999" placeholder="BLOCKING TIME*" type="number" ng-model="c.event.roundConfig.blockingTime"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.blockingTime.$valid">TODO{{lang.language.json.event.blockingTimeError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.heatStartCountdown}}</td>
+			<td><input name="heatStartCountdown" required ng-minlength="1" ng-maxlength="9999" placeholder="HEAT START COUNTDOWN*" type="number" ng-model="c.event.roundConfig.heatStartCountdown"> <span class="inputMessage"
+				ng-show="c.submitted && !roundsForm.heatStartCountdown.$valid">TODO{{lang.language.json.event.heatStartCountdownError}}</span></td>
+		</tr>
+		<tr>
+			<td>{{lang.language.json.event.roundStartDate}}</td>
+			<td class="select"><input name="roundStartDate" type="date" ng-model="c.event.roundConfig.roundStartDate"><span class="inputMessage"
+				ng-show="c.submitted && !eventForm.roundStartDate.$valid">{{lang.language.json.event.roundStartDateError}}</span>
+				</td>
+		</tr>
+	</table>
+</form>
+<div class="basicButton" ng-click="c.save(roundsForm.$valid, c.event)">{{lang.language.json.basic.save}}</div>
+<div class="basicButton" ng-click="c.reset()">{{lang.language.json.basic.reset}}</div>

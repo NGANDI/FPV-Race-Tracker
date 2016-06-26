@@ -1,0 +1,17 @@
+<div class="headerLine">
+	<span>{{lang.language.json.club.clubList}}</span><input class="filter" placeholder="{{lang.language.json.basic.search}}" type="text" ng-model="clubFilter" />
+</div>
+<table class="basicTableList">
+	<thead>
+		<tr>
+			<td><span>NAME</span></td>
+			<td><span>COUNTRY</span></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-click="c.showEdit(club)" ng-class-odd="'oddRow'" ng-repeat="club in c.clubs | filter: clubFilter track by $index">
+			<td><span>{{club.name}}</span></td>
+			<td><span>{{club.country}}</span></td>
+		</tr>
+	</tbody>
+</table>
