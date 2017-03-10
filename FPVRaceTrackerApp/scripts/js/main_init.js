@@ -18,6 +18,7 @@ var main;
             store.add(new main.Language(main.LanguageName.CUSTOM, englishTranslation, true));
             store.add(new main.Language(main.LanguageName.ENGLISH, englishTranslation, false));
             store.add(new main.Language(main.LanguageName.GERMAN, germanTranslation, false));
+            store.add(new main.Language(main.LanguageName.JAPANESE, japaneseTranslation, false));
             store = db.createObjectStore(main.DBStore.MAINCONFIG, { keyPath: "idx", autoIncrement: true });
             store.add(new main.MainConfig(main.LanguageName.ENGLISH, "Austria"));
             store = event.currentTarget.transaction.objectStore("language");
@@ -272,6 +273,101 @@ var main;
         notificationError: {
             tagNotFound: "Übersetzung nicht gefunden!",
             oops: "Oops, da ist etwas schief gelaufen! Kontaktieren Sie info@fpvracetracker.com wenn Sie Hilfe benötigen!"
+        }
+    };
+    var japaneseTranslation = {
+        basic: {
+            save: "保存",
+            reset: "リセット",
+            'delete': "削除",
+            country: "国",
+            club: "クラブ",
+            name: "名前",
+            search: "検索"
+        },
+        menu: {
+            events: "イベント",
+            race: "レース",
+            account: "アカウント",
+            settings: "設定",
+            pilots: "パイロット",
+            clubs: "クラブ",
+            version: "バージョン"
+        },
+        subMenu: {
+            eventsNew: "新規イベント",
+            eventsUpcoming: "今後のイベント",
+            eventsPast: "過去のイベント",
+            pilotsNew: "新規パイロット",
+            pilotsList: "パイロット一覧",
+            pilotsEdit: "パイロット編集",
+            clubsNew: "新規クラブ",
+            clubsList: "クラブ一覧",
+            clubsEdit: "クラブ編集",
+            settingsLanguage: "言語"
+        },
+        event: {
+            event: "イベント",
+            pilots: "パイロット",
+            race: "レース",
+            rounds: "ラウンド",
+            heats: "ヒート",
+            createEvent: "イベントの作成:",
+            name: "イベント名",
+            address: "場所",
+            dateFrom: "開始日",
+            dateTo: "終了日",
+            contactEmail: "連絡先メールアドレス",
+            automaticMode: "自動モード",
+            classes: "クラス",
+            nameError: "イベント名は、1〜100文字で入力してください。",
+            addressError: "場所は、1〜200文字で入力してください。",
+            contactEmailError: "連絡先メールアドレスは、100文字以内でname@domain.atのような形式で入力してください。"
+        },
+        pilot: {
+            firstName: "名",
+            lastName: "姓",
+            email: "メールアドレス",
+            alias: "エイリアス",
+            registrationNumber: "登録No.",
+            pilotList: "パイロット一覧:",
+            createPilot: "パイロット追加:",
+            editPilot: "パイロット編集:",
+            transponder: "トランスポンダ:",
+            firstNameError: "名は、1〜30文字で入力してください。",
+            lastNameError: "姓は、1〜30文字で入力してください。",
+            aliasError: "エイリアスは、1〜30文字で入力してください。",
+            emailError: "メールアドレスは、100文字以内でname@domain.atのような形式で入力してください。",
+            registrationNumberError: "登録No.は、1〜30文字で入力してください。",
+            transponderNumberError: "トランスポンダは、1〜30文字で入力してください。"
+        },
+        languageConfig: {
+            selectLanguage: "言語:",
+            editLanguage: "言語の編集"
+        },
+        club: {
+            createClub: "クラブ追加:",
+            clubList: "クラブ一覧:",
+            editClub: "クラブ編集:",
+            nameError: "クラブ名は、1〜30文字で入力してください。"
+        },
+        notification: {
+            success: "成功",
+            info: "情報",
+            warn: "警告",
+            error: "エラー"
+        },
+        notificationInfo: {},
+        notificationSuccess: {
+            saved: "保存",
+            deleted: "削除"
+        },
+        notificationWarn: {
+            formNotValid: "赤色の入力項目を修正してください。"
+        },
+        notificationError: {
+            tagNotFound: "翻訳データが見つかりません。",
+            oops: "予期しない問題が発生しました。info@fpvracetracker.comまでお問い合わせください。"
         }
     };
 })(main || (main = {}));
