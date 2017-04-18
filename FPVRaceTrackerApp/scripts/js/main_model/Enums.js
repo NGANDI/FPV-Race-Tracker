@@ -6,6 +6,7 @@ var main;
         }
         LanguageName.ENGLISH = "English";
         LanguageName.GERMAN = "Deutsch";
+        LanguageName.JAPANESE = "日本語";
         LanguageName.CUSTOM = "Custom";
         return LanguageName;
     }());
